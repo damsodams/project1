@@ -15,6 +15,9 @@ class CreatePostulerOffresTable extends Migration
     {
         Schema::create('postuler__offres', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('offre_id')->unsigned();
+            $table->bigInteger('developpeur_id')->unsigned();
+            $table->enum('type_contrat', array ('0' , '1' , '2' , "3"))->default('0');
             $table->timestamps();
         });
     }

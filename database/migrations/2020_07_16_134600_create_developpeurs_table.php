@@ -15,6 +15,14 @@ class CreateDeveloppeursTable extends Migration
     {
         Schema::create('developpeurs', function (Blueprint $table) {
             $table->id();
+            $table->string('competence');
+            $table->string('cv');
+            $table->string('photo');
+            $table->string('adresse');
+            $table->string('ville');
+            $table->integer('code_postal');
+            $table->integer('telephone');
+            $table->DateTime('date_naissance');
             $table->timestamps();
         });
     }

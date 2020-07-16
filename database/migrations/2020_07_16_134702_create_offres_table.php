@@ -15,6 +15,12 @@ class CreateOffresTable extends Migration
     {
         Schema::create('offres', function (Blueprint $table) {
             $table->id();
+            $table->string('titre');
+            $table->string('description');
+            $table->string('pdf');
+            $table->string('contrainte');
+            $table->enum('type_offre', array ('projet' , 'stage'))->default('projet');
+            $table->bigInteger('entreprise_id')->unsigned();
             $table->timestamps();
         });
     }
