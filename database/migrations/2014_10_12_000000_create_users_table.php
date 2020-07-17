@@ -20,8 +20,8 @@ class CreateUsersTable extends Migration
       $table->timestamp('email_verified_at')->nullable();
       $table->string('password');
       $table->enum('statut', array ('dev', 'admin','entreprise'))->default('dev');
-      $table->bigInteger('entreprise_id')->unsigned();
-      $table->bigInteger('developpeur_id')->unsigned();
+      $table->bigInteger('entreprise_id')->unsigned()->nullable();
+      $table->bigInteger('developpeur_id')->unsigned()->nullable();
       $table->rememberToken();
       $table->timestamps();
     });
