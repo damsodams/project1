@@ -21,7 +21,7 @@ class CreateEntreprisesTable extends Migration
           $table->string('adresse');
           $table->string('ville');
           $table->integer('code_postal');
-          $table->integer('telephone');
+          $table->string('telephone');
           $table->string('secteur_activité');
           $table->integer('nb_salarie');
           $table->timestamps();

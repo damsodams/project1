@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
       $table->enum('statut', array ('dev', 'admin','entreprise'))->default('dev');
       $table->bigInteger('entreprise_id')->unsigned()->nullable();
       $table->bigInteger('developpeur_id')->unsigned()->nullable();
+      $table->bigInteger('administrateur_id')->unsigned()->nullable();
       $table->rememberToken();
       $table->timestamps();
     });

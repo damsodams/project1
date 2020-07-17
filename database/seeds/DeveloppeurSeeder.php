@@ -19,7 +19,7 @@ class DeveloppeurSeeder extends Seeder
       'ville' => 'lyon',
       'code_postal' => '345678',
       'telephone' => '23456789',
-      'date_naissance' => '2020-07-15 17:06:25'
+      'date_naissance' => '2020-07-15 17:06:25',
     ]);
     }
 }

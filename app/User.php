@@ -16,6 +16,10 @@ class User extends Authenticatable
   {
       return $this->belongsTo('App\Developpeur');
   }
+  public function administrateur()
+  {
+      return $this->belongsTo('App\Administrateur');
+  }
 
     use Notifiable;
 

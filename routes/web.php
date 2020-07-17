@@ -20,3 +20,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/back' , 'BackController@index')->name('back');
+
+
+//Route gestion Developpeur
+Route::resource('back/developpeur', 'DeveloppeurController');
+//Route gestion Entreprise
+Route::resource('back/entreprise', 'EntrepriseController');
+//Route gestion UTILISATEUR
+Route::resource('back/utilisateur', 'UserController');

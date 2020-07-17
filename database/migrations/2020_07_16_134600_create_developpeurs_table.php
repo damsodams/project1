@@ -21,7 +21,7 @@ class CreateDeveloppeursTable extends Migration
             $table->string('adresse');
             $table->string('ville');
             $table->integer('code_postal');
-            $table->integer('telephone');
+            $table->string('telephone');
             $table->DateTime('date_naissance');
             $table->timestamps();
         });
