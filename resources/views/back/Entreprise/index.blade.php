@@ -17,6 +17,7 @@
                   <tr>
                     <th>ID</th>
                     <th>Nom</th>
+                    <th>logo</th>
                     <th>Siret</th>
                     <th>Téléphone</th>
                     <th>Addresse</th>
@@ -29,6 +30,7 @@
                     <tr>
                       <td> {{$entreprise->id}} </td>
                       <td> {{$entreprise->nom}} </td>
+                      <td> <img style="height : 40px; width : 40px;" src="{{url($entreprise->logo)}}"></td>
                       <td> {{$entreprise->siret}} </td>
                       <td> {{$entreprise->telephone}} </td>
                       <td> {{$entreprise->adresse}} {{$entreprise->code_postal}} {{$entreprise->ville}}</td>
@@ -50,13 +52,6 @@
                               <i class="material-icons">Modifier</i>
                             </button>
                           </form>
-                          <form action="{{route('entreprise.destroy', $entreprise->id)}}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" rel="tooltip" class="btn btn-danger btn-round" onclick="return confirm('Est tu sur de vouloir supprimer cette entreprise ?')">
-                              <i class="material-icons">Supprimer</i>
-                            </button>
-                          </form>
                         </div>
                       </td>
                     </tr>
@@ -66,6 +61,7 @@
                   <tr>
                     <th>ID</th>
                     <th>Nom</th>
+                    <th>logo</th>
                     <th>Siret</th>
                     <th>Téléphone</th>
                     <th>Addresse</th>

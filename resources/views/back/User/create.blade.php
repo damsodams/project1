@@ -14,7 +14,7 @@
               <h3 class="card-title">creation utilisateur</h3>
             </div>
 
-            <form class="" action="{{route('utilisateur.store')}}" method="post">
+            <form class="" action="{{route('utilisateur.store')}}" method="post"  enctype="multipart/form-data">
               @csrf
 
               <div class="form-group">
@@ -80,7 +80,7 @@
                 </div>
                 <div class="form-group">
                   <label >Logo d'entreprise</label>
-                  <input name="logo" type="text" class="form-control"  >
+                  <input name="logo" type="file" class="form-control"  >
                 </div>
                 <div class="form-group">
                   <label >n° Siret</label>
@@ -121,8 +121,12 @@
 
               <div id="admin" style="display:none;">
                 <div class="form-group">
-                  <label >mot de passe</label>
-                  <input type="text" class="form-control"  >
+                  <label >nom</label>
+                  <input name="noma" type="text" class="form-control"  >
+                </div>
+                <div class="form-group">
+                  <label >prenom</label>
+                  <input name="prenom" type="text" class="form-control"  >
                 </div>
               </div>
               <div class="card-footer">

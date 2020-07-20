@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Trouve Ton Dev| title</title>
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <link rel="stylesheet" href="{{url('plugins/fontawesome-free/css/all.min.css')}}">
@@ -49,8 +49,12 @@
       </form>
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
-        <!-- Messages Dropdown Menu -->
-        <li class="nav-item dropdown">
+        <li class="nav-item">
+          <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+          </form>
         </li>
       </ul>
     </nav>
@@ -65,13 +69,13 @@
       <?php $user = auth()->user();?>
       <!-- Sidebar -->
       <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
+        <!-- Sidebar user panel (optional)//$user->name}} -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
             <img src="{{url('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">{{$user->name}}</a>
+            <a href="#" class="d-block"></a>
           </div>
         </div>
         <!-- Sidebar Menu -->
@@ -89,8 +93,14 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
+                  <a href="{{ route('administrateur.index')}}" id="navDev" class="nav-link">
+                    <i class="far fa fa-asterisk"></i>
+                    <p>Administrateur</p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="{{ route('developpeur.index')}}" id="navDev" class="nav-link">
-                    <i class="far fa fa-terminal"></i>
+                    <i class="far fa fa-code"></i>
                     <p>Développeurs</p>
                   </a>
                 </li>

@@ -57,7 +57,7 @@
                                   <i class="material-icons">Voire</i>
                                 </button>
                               </form>
-                              <form action="{{route('entreprise.edit', $utilisateur->id)}}" method="POST">
+                              <form action="{{route('utilisateur.edit', $utilisateur->id)}}" method="POST">
                                 @csrf
                                 @method('GET')
                                 <button type="submit" rel="tooltip" class="btn btn-success btn-round">

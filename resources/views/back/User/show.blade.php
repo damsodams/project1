@@ -42,11 +42,15 @@
                 </div>
                 <div class="form-group">
                   <label >CV</label>
-                  <input type="text" class="form-control" >
+                  <div>
+                    <a href="{{asset(url($utilisateur->developpeur->cv))}}" target="_blank">
+                      <img class="card_img" style="max-height : 40px; max-width : 40px;"src="{{url('images/pdf_ico.png')}}">
+                    </a>
+                  </div>
                 </div>
                 <div class="form-group">
                   <label >Photo</label>
-                  <input type="text" class="form-control" >
+                  <div><img style="max-height : 250px ; max-width : 250px ; border-radius : 5px;" src="{{url($utilisateur->developpeur->photo)}}"></div>
                 </div>
                 <div class="form-group">
                   <label >Adresse</label>
@@ -72,7 +76,7 @@
                 </div>
                 <div class="form-group">
                   <label >Logo</label>
-                  <input type="text" class="form-control" disabled value="{{$utilisateur->entreprise->siret}}">
+                  <div><img style="max-height : 250px ; max-width : 250px ; border-radius : 5px;" src="{{url($utilisateur->entreprise->logo)}}"></div>
                 </div>
                 <div class="form-group">
                   <label >N° SIRET</label>

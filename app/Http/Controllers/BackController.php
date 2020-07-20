@@ -9,4 +9,5 @@ class BackController extends Controller
   public function index(){
     return view ('layouts.templateBack');
   }
+
 }
