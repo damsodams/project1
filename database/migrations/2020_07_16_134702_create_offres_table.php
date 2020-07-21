@@ -20,6 +20,8 @@ class CreateOffresTable extends Migration
             $table->string('pdf');
             $table->string('contrainte');
             $table->enum('type_offre', array ('projet' , 'stage'))->default('projet');
+            $table->DateTime('date_inline');
+            $table->string('vue')->nullable();
             $table->bigInteger('entreprise_id')->unsigned();
             $table->timestamps();
         });

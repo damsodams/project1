@@ -1,4 +1,7 @@
 @extends('layouts.templateBack')
+@section('activeadmin')
+  active
+@endsection
 @section('content')
   <section class="content">
     <div class="container-fluid">

@@ -1,5 +1,7 @@
 @extends('layouts.templateBack')
-
+@section('activeadmin')
+  active
+@endsection
 @section('content')
   <!-- Main content -->
   <section class="content">

@@ -13,7 +13,7 @@ class EntrepriseSeeder extends Seeder
     {
       DB::table('entreprises')->insert([
       'nom'=> 'Lacoste',
-      'logo'=> 'http://sdfghjkl.jpg',
+      'logo'=> 'img/lacost.jpg',
       'siret'=> '1 Place Giovanni da Verrazzano',
       'adresse'=> '1 Place Giovanni da Verrazzano',
       'ville' => 'lyon',

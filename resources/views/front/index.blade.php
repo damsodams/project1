@@ -1,103 +1,47 @@
 @extends('layouts.templateFront')
-
 @section('content')
-  <!-- Timelime example  -->
   <div class="row">
     <div class="col-md-12">
-      <!-- The time line -->
       <div class="timeline">
-        <!-- timeline time label -->
-        <div class="time-label">
-          <span class="bg-red">10 Feb. 2014</span>
-        </div>
-        <!-- /.timeline-label -->
-        <!-- timeline item -->
-        <div>
-          <i class="fas fa-envelope bg-blue"></i>
-          <div class="timeline-item">
-            <span class="time"><i class="fas fa-clock"></i> 12:05</span>
-            <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-
-            <div class="timeline-body">
-              Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-              weebly ning heekya handango imeem plugg dopplr jibjab, movity
-              jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-              quora plaxo ideeli hulu weebly balihoo...
-            </div>
-            <div class="timeline-footer">
-              <a class="btn btn-primary btn-sm">Read more</a>
-              <a class="btn btn-danger btn-sm">Delete</a>
-            </div>
+        <br>
+        @php
+          $i = 0;
+        @endphp
+        @foreach ($lesoffres as $offre)
+        @if ($i == 0)
+          <div class="time-label">
+            @if (date("d-m-Y" , strtotime($offre->date_inline)) == date("d-m-Y"))
+              <span class="bg-red">Aujourd'hui</span>
+            @else
+              <span class="bg-red">{{date("d-m-Y" , strtotime($offre->date_inline))}}</span>
+            @endif
           </div>
-        </div>
-        <!-- END timeline item -->
-        <!-- timeline item -->
-        <div>
-          <i class="fas fa-user bg-green"></i>
-          <div class="timeline-item">
-            <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
-            <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request</h3>
-          </div>
-        </div>
-        <!-- END timeline item -->
-        <!-- timeline item -->
-        <div>
-          <i class="fas fa-comments bg-yellow"></i>
-          <div class="timeline-item">
-            <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
-            <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-            <div class="timeline-body">
-              Take me to your leader!
-              Switzerland is small and neutral!
-              We are more like Germany, ambitious and misunderstood!
+        @else
+          @if (date("d-m-Y", strtotime($lesoffres[$i-1]->date_inline)) != date("d-m-Y" , strtotime($offre->date_inline)))
+            <div class="time-label">
+              <span class="bg-red">{{date("d-m-Y" , strtotime($offre->date_inline))}}</span>
             </div>
-            <div class="timeline-footer">
-              <a class="btn btn-warning btn-sm">View comment</a>
-            </div>
-          </div>
-        </div>
-        <!-- END timeline item -->
-        <!-- timeline time label -->
-        <div class="time-label">
-          <span class="bg-green">3 Jan. 2014</span>
-        </div>
-        <!-- /.timeline-label -->
-        <!-- timeline item -->
-        <div>
-          <i class="fa fa-camera bg-purple"></i>
-          <div class="timeline-item">
-            <span class="time"><i class="fas fa-clock"></i> 2 days ago</span>
-            <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-            <div class="timeline-body">
-              <img src="https://placehold.it/150x100" alt="...">
-              <img src="https://placehold.it/150x100" alt="...">
-              <img src="https://placehold.it/150x100" alt="...">
-              <img src="https://placehold.it/150x100" alt="...">
-              <img src="https://placehold.it/150x100" alt="...">
-            </div>
-          </div>
-        </div>
-        <!-- END timeline item -->
-        <!-- timeline item -->
-        <div>
-          <i class="fas fa-video bg-maroon"></i>
+          @endif
+        @endif
+          <div>
+          <img class="timeline-logoentreprise" src="{{url($offre->entreprise->logo)}}">
+            <div class="timeline-item">
+              <span class="time"><i class="fas fa-clock"></i>{{$offre->date_inline}}</span>
+              <h3 class="timeline-header"><a href="#">{{$offre->titre}}</a>  {{$offre->entreprise->nom}}</h3>
 
-          <div class="timeline-item">
-            <span class="time"><i class="fas fa-clock"></i> 5 days ago</span>
-
-            <h3 class="timeline-header"><a href="#">Mr. Doe</a> shared a video</h3>
-
-            <div class="timeline-body">
-              <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tMWkeBIohBs" allowfullscreen></iframe>
+              <div class="timeline-body">
+                {{$offre->description}}
+              </div>
+              <div class="timeline-footer">
+                <a href="#" class="btn btn-primary btn-sm">Voir +</a>
+                <a href="#" class="btn btn-success btn-sm">Postuler</a>
               </div>
             </div>
-            <div class="timeline-footer">
-              <a href="#" class="btn btn-sm bg-maroon">See comments</a>
-            </div>
           </div>
-        </div>
-        <!-- END timeline item -->
+          @php
+            $i++;
+          @endphp
+        @endforeach
         <div>
           <i class="fas fa-clock bg-gray"></i>
         </div>

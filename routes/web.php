@@ -15,9 +15,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 // Arriver sur le site affichage des offre
-Route::get('/', 'FrontControlleur@index')->name('home');
-
-
+Route::get('/', 'FrontControlleur@index')->name('front');
+Route::get('/home', 'FrontControlleur@index')->name('home');
 //Les routes pour les Utilisateurs du site -> FRONT
 Route::group(['middleware'=>'auth'],function () {
 
@@ -32,8 +31,13 @@ Route::group(['middleware'=>'auth','middleware'=>'admin'],function () {
   Route::resource('back/entreprise', 'EntrepriseController');
   //Route gestion UTILISATEUR
   Route::resource('back/utilisateur', 'UserController');
+  //Route gestion des Offres
+  Route::resource('back/offre' , 'OffreController');
+  //Route vers la dashboard du back office
+  Route::get('/back','BackController@index')->name('backo');
 });
 //Les routes pour les Entreprises du site -> BACK
 Route::group(['middleware'=>'auth','middleware'=>'entreprise'],function () {
-
+  //Route gestion des offres par l'entreprise
+  Route::resource('back/offre_entreprise' , 'OffreEntrepriseController');
 });

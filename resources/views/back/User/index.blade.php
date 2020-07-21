@@ -1,5 +1,7 @@
 @extends('layouts.templateBack')
-
+@section('activeuser')
+  active
+@endsection
 @section('content')
   <!-- Main content -->
 

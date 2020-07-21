@@ -30,23 +30,13 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="index3.html" class="nav-link">Home</a>
+          <a href="{{route('backo')}}" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Contact</a>
+          <a href="{{route('home')}}" class="nav-link">Afficher Front</a>
         </li>
+
       </ul>
-      <!-- SEARCH FORM -->
-      <form class="form-inline ml-3">
-        <div class="input-group input-group-sm">
-          <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-navbar" type="submit">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
@@ -93,25 +83,25 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{ route('administrateur.index')}}" id="navDev" class="nav-link">
+                  <a href="{{ route('administrateur.index')}}" id="navDev" class="nav-link @section("activeadmin")@show">
                     <i class="far fa fa-asterisk"></i>
                     <p>Administrateur</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('developpeur.index')}}" id="navDev" class="nav-link">
+                  <a href="{{ route('developpeur.index')}}" id="navDev" class="nav-link @section("activedev")@show">
                     <i class="far fa fa-code"></i>
                     <p>Développeurs</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('entreprise.index')}}" id="navEnt" class="nav-link">
+                  <a href="{{ route('entreprise.index')}}" id="navEnt" class="nav-link @section("activeentreprise")@show">
                     <i class="far fa fa-briefcase"></i>
                     <p>Entreprises</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="{{ route('utilisateur.index')}}" id="navUse" class="nav-link">
+                <li class="nav-item active">
+                  <a href="{{ route('utilisateur.index')}}" id="navUse" class="nav-link @section("activeuser")@show ">
                     <i class="far fa fa-user"></i>
                     <p>Utilisateurs</p>
                   </a>
@@ -119,8 +109,8 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a href="pages/widgets.html" class="nav-link">
-                <i class="fa fa-file-text-o"></i>
+              <a href="{{ route('offre.index')}}" class="nav-link @section("activeoffre")@show">
+                <i class="fa fa-barcode"></i>
                 <p>
                   Offres
                   <!--  <span class="right badge badge-danger">New</span>-->
