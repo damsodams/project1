@@ -34,7 +34,15 @@
               </div>
               <div class="timeline-footer">
                 <a href="#" class="btn btn-primary btn-sm">Voir +</a>
-                <a href="#" class="btn btn-success btn-sm">Postuler</a>
+                <?php $user = auth()->user();?>
+                @if(isset($user))
+                  @if($user->statut == "dev")
+                  <a href="{{route('postuler.edit',$offre->id)}}" class="btn btn-success btn-sm">Postuler</a>
+                  @endif
+                @endif
+                @if(isset($user) == false)
+                <a href="{{ route('login') }}" class="btn btn-success btn-sm">Veuiller vous connecter pour postuler a une offre</a>
+                @endif
               </div>
             </div>
           </div>

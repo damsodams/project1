@@ -19,7 +19,7 @@ Route::get('/', 'FrontControlleur@index')->name('front');
 Route::get('/home', 'FrontControlleur@index')->name('home');
 //Les routes pour les Utilisateurs du site -> FRONT
 Route::group(['middleware'=>'auth'],function () {
-
+  Route::resource('front/postuler' , 'PostulerController');
 });
 //Les routes pour les Admins du site -> BACK
 Route::group(['middleware'=>'auth','middleware'=>'admin'],function () {
@@ -39,5 +39,5 @@ Route::group(['middleware'=>'auth','middleware'=>'admin'],function () {
 //Les routes pour les Entreprises du site -> BACK
 Route::group(['middleware'=>'auth','middleware'=>'entreprise'],function () {
   //Route gestion des offres par l'entreprise
-  Route::resource('back/offre_entreprise' , 'OffreEntrepriseController');
+  Route::resource('front/offre_entreprise' , 'OffreEntrepriseController');
 });

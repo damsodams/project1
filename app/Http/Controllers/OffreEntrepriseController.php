@@ -41,7 +41,26 @@ class OffreEntrepriseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $entrepriseid= auth::user()->entreprise_id;
+        $offre = new Offre;
+        $offre->titre = $request->input('titre');
+        $offre->description = $request->input('description');
+        $pdf_upload = $request->file('pdf');
+        $rand = Str::random(10);
+        if(($pdf_upload != NULL) ){
+          $pdf_nommage = date('Y-m-d') . ' - ' . $rand .' - '. $pdf_upload->getClientOriginalName();
+          $pdf_get = 'pdf\\' . $pdf_nommage;
+          if (($pdf_upload->move('pdf', $pdf_nommage))) {
+            $offre->pdf = $pdf_get;
+          }
+        }
+        $offre->contrainte = $request->input('contrainte');
+        $offre->type_offre = $request->input('type_offre');
+        $offre->date_inline = date("Y-m-d");
+        $offre->entreprise_id = $entrepriseid;
+        $offre->save();
+        return redirect()->route("offre_entreprise.index");
+
     }
 
     /**

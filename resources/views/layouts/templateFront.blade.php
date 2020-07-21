@@ -93,7 +93,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="../examples/language-menu.html" class="nav-link @section('activedof') @show">
+                    <a href="{{route('offre_entreprise.create')}}" class="nav-link @section('activedof') @show">
                       <i class="fas fa-plus-square"></i>
                       <p>Déposer une offre</p>
                     </a>
@@ -101,13 +101,13 @@
                   <li class="nav-item">
                     <a href="{{route('offre_entreprise.index')}}" class="nav-link @section('activegof') @show">
                       <i class="fa fa-barcode"></i>
-                      <p>Gestion de mes offre</p>
+                      <p>Gestion de mes offres</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="../examples/language-menu.html" class="nav-link @section('activepro') @show">
                       <i class="fas fa-tasks"></i>
-                      <p>Mes projet en cours</p>
+                      <p>Mes projets en cours</p>
                     </a>
                   </li>
                 @elseif ($user->statut == "dev")

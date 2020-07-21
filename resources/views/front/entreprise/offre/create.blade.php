@@ -7,7 +7,7 @@
         <h3 class="card-title">creation offre</h3>
       </div>
 
-      <form  action="{{route('offre.store')}}" method="post"  enctype="multipart/form-data">
+      <form  action="{{route('offre_entreprise.store')}}" method="post"  enctype="multipart/form-data">
         @csrf
 
 
