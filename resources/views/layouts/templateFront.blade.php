@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="{{url('plugins/fontawesome-free/css/all.min.css')}}">
   <link rel="stylesheet" href="{{url('dist/css/adminlte.min.css')}}">
   <link rel="stylesheet" href="{{url('css/perso.css')}}">
+  <link rel="stylesheet" href="{{url('scss/perso.scss')}}">
+  <link rel="stylesheet" href="{{url('plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
 </head>
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
@@ -54,7 +56,7 @@
         </ul>
       </nav>
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <a href="../../index3.html" class="brand-link">
+        <a href="#" class="brand-link">
           <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
           <span class="brand-text font-weight-light">Trouve Ton Dev</span>
         </a>
@@ -112,13 +114,13 @@
                   </li>
                 @elseif ($user->statut == "dev")
                   <li class="nav-item">
-                    <a href="../examples/language-menu.html" class="nav-link @section('activempr') @show">
+                    <a href="#" class="nav-link @section('activempr') @show">
                       <i class="fas fa-laptop-code"></i>
                       <p>Mes Projets</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{route('postuler.index')}}" class="nav-link @section('activemde') @show">
+                    <a href="{{route('index_offre')}}" class="nav-link @section('activemde') @show">
                       <i class="fas fa-hourglass-half"></i>
                       <p>Mes Demandes</p>
                     </a>
@@ -142,5 +144,13 @@
     <script src="{{url('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{url('dist/js/adminlte.min.js')}}"></script>
     <script src="{{url('dist/js/demo.js')}}"></script>
+    <script src="{{url('plugins/jquery/jquery.min.js')}}"></script>
+    <script src="{{url('plugins/jquery/jquery.min.js')}}"></script>
+    <script src="{{url('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+    <script src="{{url('plugins/jquery-mousewheel/jquery.mousewheel.js')}}"></script>
+    <script src="{{url('plugins/raphael/raphael.min.js')}}"></script>
+    <script src="{{url('plugins/jquery-mapael/jquery.mapael.min.js')}}"></script>
+    <script src="{{url('plugins/chart.js/Chart.min.js')}}"></script>
+    <script src="{{url('dist/js/pages/dashboard2.js')}}"></script>
   </body>
   </html>

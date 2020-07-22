@@ -13,8 +13,8 @@ class DeveloppeurSeeder extends Seeder
     {
       DB::table('developpeurs')->insert([
       'competence'=> 'c ; c++ ; c#',
-      'cv'=> 'https://sdfghjkl.pdf',
-      'photo'=> 'http://sdfghjkl.jpg',
+      'cv'=> 'seed/pdf/cv.pdf',
+      'photo'=> 'seed/images/developpeur.png',
       'adresse'=> '1 Place Giovanni da Verrazzano',
       'ville' => 'lyon',
       'code_postal' => '345678',

@@ -19,7 +19,14 @@ Route::get('/', 'FrontControlleur@index')->name('front');
 Route::get('/home', 'FrontControlleur@index')->name('home');
 //Les routes pour les Utilisateurs du site -> FRONT
 Route::group(['middleware'=>'auth'],function () {
-  Route::resource('front/postuler' , 'PostulerController');
+  //route action postuler
+  Route::get('front/postuler/{id}', 'DeveloppeurFrontController@postuler')->name('postuler_offre');
+  //Route affichage de l'offre séléctionner
+  Route::get('front/show/{id}', 'DeveloppeurFrontController@show')->name('show_offre');
+  //route affichage des offre
+  Route::get('front/index', 'DeveloppeurFrontController@index')->name('index_offre');
+
+
 });
 //Les routes pour les Admins du site -> BACK
 Route::group(['middleware'=>'auth','middleware'=>'admin'],function () {
@@ -40,4 +47,6 @@ Route::group(['middleware'=>'auth','middleware'=>'admin'],function () {
 Route::group(['middleware'=>'auth','middleware'=>'entreprise'],function () {
   //Route gestion des offres par l'entreprise
   Route::resource('front/offre_entreprise' , 'OffreEntrepriseController');
+  Route::post('front/mail' , 'EntrepriseFrontController@mail_index')->name('mail_index');
+  
 });

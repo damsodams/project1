@@ -14,7 +14,7 @@ class OffreSeeder extends Seeder
       DB::table('offres')->insert([
       'titre'=> 'dev ops',
       'description'=> 'looking for a dev',
-      'pdf'=> 'tatatatatata',
+      'pdf'=> 'seed/pdf/offre.pdf',
       'contrainte'=> '18h',
       'type_offre'=>'projet',
       'entreprise_id'=>'1',
@@ -23,7 +23,7 @@ class OffreSeeder extends Seeder
     DB::table('offres')->insert([
     'titre'=> 'dev full stack laravel',
     'description'=> 'looking for a dev dsqdsqdsqdsqdsqsdqsdq',
-    'pdf'=> 'tatatatatadsqsdqsdqta',
+    'pdf'=> 'seed/pdf/offre.pdf',
     'contrainte'=> '18h',
     'type_offre'=>'projet',
     'entreprise_id'=>'1',
