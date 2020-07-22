@@ -118,7 +118,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="../examples/language-menu.html" class="nav-link @section('activemde') @show">
+                    <a href="{{route('postuler.index')}}" class="nav-link @section('activemde') @show">
                       <i class="fas fa-hourglass-half"></i>
                       <p>Mes Demandes</p>
                     </a>

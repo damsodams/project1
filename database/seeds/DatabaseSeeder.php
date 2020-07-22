@@ -17,8 +17,9 @@ class DatabaseSeeder extends Seeder
         DeveloppeurSeeder::class,
         UserSeeder::class,
         DiplomeSeeder::class,
+        OffreSeeder::class,
         PostulerSeeder::class,
-        OffreSeeder::class
+        
       ]);
     }
 }

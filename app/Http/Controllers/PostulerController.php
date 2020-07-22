@@ -16,7 +16,11 @@ class PostulerController extends Controller
      */
     public function index()
     {
+        $devid = auth::user()->developpeur_id;
+        $LOPostuler = Postuler_offre::all()->where('developpeur_id',$devid);
 
+        return view("front.developpeur.demande")->with("LOPostuler",$LOPostuler);
+        // Afiichage
     }
 
     /**
@@ -48,7 +52,8 @@ class PostulerController extends Controller
      */
     public function show($id)
     {
-        //
+        $postuler = Postuler_offre::find($id);
+
     }
 
     /**

@@ -20,7 +20,7 @@ class Foreignkey extends Migration
       $table->foreign('developpeur_id')->references('id')->on('developpeurs')->onDelete('cascade');
     });
     Schema::table('postuler__offres', function (Blueprint $table) {
-      $table->foreign('offre_id')->references('id')->on('entreprises')->onDelete('cascade');
+      $table->foreign('offre_id')->references('id')->on('offres')->onDelete('cascade');
       $table->foreign('developpeur_id')->references('id')->on('developpeurs')->onDelete('cascade');
     });
     Schema::table('users', function (Blueprint $table) {
