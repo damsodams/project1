@@ -47,6 +47,6 @@ Route::group(['middleware'=>'auth','middleware'=>'admin'],function () {
 Route::group(['middleware'=>'auth','middleware'=>'entreprise'],function () {
   //Route gestion des offres par l'entreprise
   Route::resource('front/offre_entreprise' , 'OffreEntrepriseController');
-  Route::post('front/mail' , 'EntrepriseFrontController@mail_index')->name('mail_index');
-  
+  Route::get('front/mail' , 'EntrepriseFrontController@mail_index')->name('mail_index');
+
 });

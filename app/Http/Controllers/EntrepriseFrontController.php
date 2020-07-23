@@ -17,7 +17,7 @@ class EntrepriseFrontController extends Controller
    */
   public function index()
   {
-    
+
   }
 
   /**
@@ -28,7 +28,8 @@ class EntrepriseFrontController extends Controller
    */
   public function mail_index()
   {
-
+    
+    return view ('front.entreprise.contact')->with('messages',$postuler_offre);
   }
 
 }

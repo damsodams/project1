@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Postuler_offre;
 use App\Offre;
 use App\developpeurs;
+use App\message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -64,9 +65,13 @@ class DeveloppeurFrontController extends Controller
     $lesoffresuser = Postuler_offre::all()->where('developpeur_id',$dev_id);
     foreach ($lesoffresuser as $offre) {
       if($id == $offre->offre_id){
-        return redirect()->route("offre_entreprise.index")->with('message', '/Existe deja');
+        return redirect()->route("offre_entreprise.index");
       }
     }
+
+      $message = new Message;
+      $message->emetteur = $dev_id;
+     $message->destinataire = $offre->offre->entreprise->id
       $postuler = new Postuler_offre;
       $postuler->offre_id = $id;
       $postuler->developpeur_id = $dev_id;

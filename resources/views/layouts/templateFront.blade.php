@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="{{url('css/perso.css')}}">
   <link rel="stylesheet" href="{{url('scss/perso.scss')}}">
   <link rel="stylesheet" href="{{url('plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
+  <link rel="stylesheet" href="{{url('plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
 </head>
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
@@ -89,7 +90,7 @@
               @if (isset($user->name))
                 @if ($user->statut == "entreprise")
                   <li class="nav-item">
-                    <a href="../examples/language-menu.html" class="nav-link @section('activemail') @show">
+                    <a href="{{route('mail_index')}}" class="nav-link @section('activemail') @show">
                       <i class="fas fa-mail-bulk"></i>
                       <p>Mes Mails</p>
                     </a>

@@ -28,6 +28,10 @@ class Foreignkey extends Migration
       $table->foreign('developpeur_id')->references('id')->on('developpeurs')->onDelete('cascade');
       $table->foreign('administrateur_id')->references('id')->on('administrateurs')->onDelete('cascade');
     });
+    Schema::table('messages', function (Blueprint $table) {
+      $table->foreign('emetteur')->references('id')->on('developpeurs')->onDelete('cascade');
+      $table->foreign('destinataire')->references('id')->on('entreprises')->onDelete('cascade');
+    });
   }
 
   /**
