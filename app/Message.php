@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
-  public function entreprise()
+  public function emetteur()
   {
-      return $this->belongsTo('App\Entreprise');
+      return $this->belongsTo('App\User');
   }
-  public function developpeur()
+  public function destinatair()
   {
-      return $this->belongsTo('App\Developpeur');
+      return $this->belongsTo('App\User');
   }
 }

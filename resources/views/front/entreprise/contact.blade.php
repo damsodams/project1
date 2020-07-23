@@ -144,22 +144,22 @@
                 <table class="table table-hover table-striped">
                   <tbody>
                   @foreach ($messages as $message)
-
+                    <tr>
+                      <td>
+                        <div class="icheck-primary">
+                          <input type="checkbox" value="" id="check1">
+                          <label for="check1"></label>
+                        </div>
+                      </td>
+                      <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>
+                      <td class="mailbox-name"><a href="read-mail.html">{{$message->emetteur->name}}</a></td>
+                      <td class="mailbox-subject"><b>{{$message->objet}}</b>
+                      </td>
+                      <td class="mailbox-attachment"></td>
+                      <td class="mailbox-date">{{$message->created_at}}</td>
+                    </tr>
                   @endforeach
-                  <tr>
-                    <td>
-                      <div class="icheck-primary">
-                        <input type="checkbox" value="" id="check1">
-                        <label for="check1"></label>
-                      </div>
-                    </td>
-                    <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 3.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"></td>
-                    <td class="mailbox-date">5 mins ago</td>
-                  </tr>
+
                   </tbody>
                 </table>
                 <!-- /.table -->

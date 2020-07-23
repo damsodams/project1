@@ -15,11 +15,13 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('emetteur')->unsigned();
-            $table->bigInteger('destinataire')->unsigned();
+            $table->bigInteger('emetteur_id')->unsigned();
+            $table->bigInteger('destinatair_id')->unsigned();
             $table->String('objet');
             $table->String('body');
             $table->String('pj');
+            $table->boolean('is_open')->default(false);
+            $table->boolean('is_delete')->default(false);
             $table->timestamps();
         });
     }

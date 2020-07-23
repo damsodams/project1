@@ -5,6 +5,7 @@ use App\Postuler_offre;
 use App\Offre;
 use App\Entreprise;
 use App\developpeurs;
+use App\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -28,8 +29,8 @@ class EntrepriseFrontController extends Controller
    */
   public function mail_index()
   {
-    
-    return view ('front.entreprise.contact')->with('messages',$postuler_offre);
+    $messages = Message::Where('destinatair_id', auth::user()->id)->get();
+    return view ('front.entreprise.contact')->with('messages',$messages);
   }
 
 }
