@@ -25,8 +25,8 @@ Route::group(['middleware'=>'auth'],function () {
   Route::get('front/show/{id}', 'DeveloppeurFrontController@show')->name('show_offre');
   //route affichage des offre
   Route::get('front/index', 'DeveloppeurFrontController@index')->name('index_offre');
-
-
+  //route affichage profil de l'utilisateur
+  Route::get('front/user','DeveloppeurFrontController@profil_show')->name('profil_show');
 });
 //Les routes pour les Admins du site -> BACK
 Route::group(['middleware'=>'auth','middleware'=>'admin'],function () {

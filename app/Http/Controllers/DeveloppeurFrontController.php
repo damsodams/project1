@@ -73,6 +73,7 @@ class DeveloppeurFrontController extends Controller
     $emetteur_id = auth::user()->id;
     $destinataire = User::where('entreprise_id',  $offre->entreprise->id)->get();
     $destinataire_id = $destinataire[0]->id;
+    //Creation du Message
     $message = new Message;
     $message->emetteur_id = $emetteur_id;
     $message->destinatair_id = $destinataire_id;
@@ -80,14 +81,17 @@ class DeveloppeurFrontController extends Controller
     $message->body = "gnagnagnagna" ;
     $message->pj = "gnol";
     $message->save();
-
-
+    //Ajout Objet postuler
     $postuler = new Postuler_offre;
     $postuler->offre_id = $id;
     $postuler->developpeur_id = $dev_id;
     $postuler->type_contrat = "1";
     $postuler->save();
     return redirect()->route("offre_entreprise.index");
+  }
+  public function profil_show(){
+
+    return view("front.developpeur.profil");
   }
 
 }

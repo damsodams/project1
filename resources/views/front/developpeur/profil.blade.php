@@ -1,0 +1,136 @@
+@extends('layouts.templateFront')
+@section('content')
+<div class="user-info">
+  <h1>Information Utilisateur</h1>
+</div>
+<div class="diplome-info">
+  <h1>Gestion des diplomes</h1>
+  <div class="row">
+    <div class="col-md-12">
+      <table id="example1" class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Intitule</th>
+            <th>Date d'obtention</th>
+            <th>Mention</th>
+            <th>action</th>
+          </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+
+              <td> </td>
+              <td> </td>
+              <td> </td>
+              <td> </td>
+              <td class="td-actions text-center">
+                <div style="display: inline-flex;">
+                  <form action="" method="POST">
+                    @csrf
+                    @method('GET')
+                    <button type="submit" rel="tooltip" class="btn btn-secondary btn-round">
+                      <i class="material-icons">Voire</i>
+                    </button>
+                  </form>
+                  <form action="" method="POST">
+                    @csrf
+                    @method('GET')
+                    <button type="submit" rel="tooltip" class="btn btn-success btn-round">
+                      <i class="material-icons">Modifier</i>
+                    </button>
+                  </form>
+                  <form action="" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" rel="tooltip" class="btn btn-danger btn-round" onclick="return confirm('Est tu sur de vouloir supprimer cette entreprise ?')">
+                      <i class="material-icons">Supprimer</i>
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+
+        </tbody>
+        <tfoot>
+          <tr>
+            <th>ID</th>
+            <th>Intitule</th>
+            <th>Date d'obtention</th>
+            <th>Mention</th>
+            <th>action</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+<div class="exp-info">
+  <h1>Gestion des experiences pro</h1>
+  <div class="row">
+    <div class="col-md-12">
+      <table id="example1" class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Annee Debut</th>
+            <th>Annee Fin</th>
+            <th>Entreprise</th>
+            <th>Ville</th>
+            <th>Poste occuper</th>
+            <th>action</th>
+          </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+              <td> </td>
+              <td>  </td>
+              <td> </td>
+              <td> </td>
+              <td> </td>
+              <td> </td>
+              <td class="td-actions text-center">
+                <div style="display: inline-flex;">
+                  <form action="" method="POST">
+                    @csrf
+                    @method('GET')
+                    <button type="submit" rel="tooltip" class="btn btn-secondary btn-round">
+                      <i class="material-icons">Voire</i>
+                    </button>
+                  </form>
+                  <form action="" method="POST">
+                    @csrf
+                    @method('GET')
+                    <button type="submit" rel="tooltip" class="btn btn-success btn-round">
+                      <i class="material-icons">Modifier</i>
+                    </button>
+                  </form>
+                  <form action="" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" rel="tooltip" class="btn btn-danger btn-round" onclick="return confirm('Est tu sur de vouloir supprimer cette entreprise ?')">
+                      <i class="material-icons">Supprimer</i>
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+
+        </tbody>
+        <tfoot>
+          <tr>
+            <th>ID</th>
+            <th>Annee Debut</th>
+            <th>Annee Fin</th>
+            <th>Entreprise</th>
+            <th>Ville</th>
+            <th>Poste occuper</th>
+            <th>action</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+@endsection

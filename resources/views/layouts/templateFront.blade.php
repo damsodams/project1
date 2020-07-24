@@ -114,6 +114,12 @@
                     </a>
                   </li>
                 @elseif ($user->statut == "dev")
+                <li class="nav-item">
+                  <a href="{{route('profil_show')}}" class="nav-link @section('activemde') @show">
+                    <i class="fas fa-hourglass-half"></i>
+                    <p>Mon Profil</p>
+                  </a>
+                </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link @section('activempr') @show">
                       <i class="fas fa-laptop-code"></i>

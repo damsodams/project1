@@ -10,4 +10,8 @@ class Developpeur extends Model
   {
       return $this->hasMany('App\diplomes');
   }
+  public function experiences()
+  {
+      return $this->hasMany('App\experience');
+  }
 }
