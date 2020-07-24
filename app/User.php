@@ -20,7 +20,10 @@ class User extends Authenticatable
   {
       return $this->belongsTo('App\Administrateur');
   }
-
+  public function messages()
+  {
+      return $this->hasMany('App\Message');
+  }
     use Notifiable;
 
     /**

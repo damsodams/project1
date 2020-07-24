@@ -90,9 +90,26 @@
               @if (isset($user->name))
                 @if ($user->statut == "entreprise")
                   <li class="nav-item">
+
                     <a href="{{route('mail_index')}}" class="nav-link @section('activemail') @show">
                       <i class="fas fa-mail-bulk"></i>
                       <p>Mes Mails</p>
+                      @php $i=0; @endphp
+                      @foreach ($user->entreprise->offres as $offre)
+                        @if (isset($offre->postuler_offre))
+                          @foreach ($offre->postuler_offre as $post)
+                            @if ($post->type_contrat == "1")
+                              @php
+                                $i++;
+                              @endphp
+                            @endif
+                          @endforeach
+                        @endif
+                      @endforeach
+                      @if ($i != 0)
+                        <span class="badge badge-danger right">{{$i}}</span>
+                      @endif
+
                     </a>
                   </li>
                   <li class="nav-item">
@@ -116,7 +133,7 @@
                 @elseif ($user->statut == "dev")
                 <li class="nav-item">
                   <a href="{{route('profil_show')}}" class="nav-link @section('activemde') @show">
-                    <i class="fas fa-hourglass-half"></i>
+                    <i class="fas fa-address-card"></i>
                     <p>Mon Profil</p>
                   </a>
                 </li>
@@ -159,5 +176,29 @@
     <script src="{{url('plugins/jquery-mapael/jquery.mapael.min.js')}}"></script>
     <script src="{{url('plugins/chart.js/Chart.min.js')}}"></script>
     <script src="{{url('dist/js/pages/dashboard2.js')}}"></script>
+
+
+<script src="{{url('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{url('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{url('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{url('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
   </body>
   </html>

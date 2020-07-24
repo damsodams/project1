@@ -22,6 +22,8 @@ class CreateMessagesTable extends Migration
             $table->String('pj');
             $table->boolean('is_open')->default(false);
             $table->boolean('is_delete')->default(false);
+            $table->boolean('is_post')->default(false);
+            $table->bigInteger('post_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }

@@ -27,6 +27,10 @@ Route::group(['middleware'=>'auth'],function () {
   Route::get('front/index', 'DeveloppeurFrontController@index')->name('index_offre');
   //route affichage profil de l'utilisateur
   Route::get('front/user','DeveloppeurFrontController@profil_show')->name('profil_show');
+  //route resource gestion des diplomes
+  Route::resource('front/diplome', 'DiplomeController');
+  //route ressource gestion des experience professionnel
+  Route::resource('back/experience', 'ExperienceController');
 });
 //Les routes pour les Admins du site -> BACK
 Route::group(['middleware'=>'auth','middleware'=>'admin'],function () {
@@ -48,5 +52,10 @@ Route::group(['middleware'=>'auth','middleware'=>'entreprise'],function () {
   //Route gestion des offres par l'entreprise
   Route::resource('front/offre_entreprise' , 'OffreEntrepriseController');
   Route::get('front/mail' , 'EntrepriseFrontController@mail_index')->name('mail_index');
+  Route::get('front/mailshow/{id}' , 'EntrepriseFrontController@mail_show')->name('mail_show');
+  Route::get('front/maildestroy/{id}' , 'EntrepriseFrontController@mail_destroy')->name('mail_destroy');
+  Route::get('front/accepter/{id}' , 'EntrepriseFrontController@candidature_accepter')->name('candidature_accepter');
+  Route::get('front/refuser/{id}' , 'EntrepriseFrontController@candidature_refuser')->name('candidature_refuser');
+
 
 });

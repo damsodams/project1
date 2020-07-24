@@ -11,10 +11,6 @@ class PostulerSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('postuler__offres')->insert([
-      'offre_id'=> '1',
-      'developpeur_id'=> '1',
-      'type_contrat' => '1'
-    ]);
+
     }
 }

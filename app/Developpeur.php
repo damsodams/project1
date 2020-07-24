@@ -8,7 +8,7 @@ class Developpeur extends Model
 {
   public function diplomes()
   {
-      return $this->hasMany('App\diplomes');
+      return $this->hasMany('App\diplome');
   }
   public function experiences()
   {

@@ -10,4 +10,5 @@ class Entreprise extends Model
       {
           return $this->hasMany('App\Offre');
       }
+
 }
