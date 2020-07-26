@@ -23,6 +23,7 @@ class CreateOffresTable extends Migration
             $table->DateTime('date_inline');
             $table->string('vue')->nullable();
             $table->bigInteger('entreprise_id')->unsigned();
+            $table->boolean('is_online')->default(true);
             $table->timestamps();
         });
     }

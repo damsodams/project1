@@ -90,7 +90,6 @@
               @if (isset($user->name))
                 @if ($user->statut == "entreprise")
                   <li class="nav-item">
-
                     <a href="{{route('mail_index')}}" class="nav-link @section('activemail') @show">
                       <i class="fas fa-mail-bulk"></i>
                       <p>Mes Mails</p>
@@ -109,7 +108,12 @@
                       @if ($i != 0)
                         <span class="badge badge-danger right">{{$i}}</span>
                       @endif
-
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('mail_index')}}" class="nav-link @section('activemail') @show">
+                      <i class="fa fa-comments"></i>
+                      <p>Mes Conversation</p>
                     </a>
                   </li>
                   <li class="nav-item">
@@ -125,7 +129,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="../examples/language-menu.html" class="nav-link @section('activepro') @show">
+                    <a href="{{route('projet_index')}}" class="nav-link @section('activepro') @show">
                       <i class="fas fa-tasks"></i>
                       <p>Mes projets en cours</p>
                     </a>

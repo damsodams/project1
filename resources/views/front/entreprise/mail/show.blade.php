@@ -97,8 +97,8 @@
                       </div>
                     </div>
                     @if ($message->post->is_validate == false)
-                      <p><a class="btn btn-success" onclick="return confirm('Tu as cliquer sur valider, est tu sûre de ton choix?')" href="{{route('candidature_accepter',['id'=>$message->id])}}">Accepter</a>
-                         <a class="btn btn-danger"  onclick="return confirm('Tu as cliquer sur refuser, est tu sûre de ton choix?')" href="{{route('candidature_refuser',['id'=>$message->id])}}">Refuser</a></p>
+                      <p><a class="btn btn-success" onclick="return confirm('Tu as cliquer sur valider, est tu sûre de ton choix?')" href="{{route('candidature_accepter',['id'=>$message->post->id])}}">Accepter</a>
+                         <a class="btn btn-danger"  onclick="return confirm('Tu as cliquer sur refuser, est tu sûre de ton choix?')" href="{{route('candidature_refuser',['id'=>$message->post->id])}}">Refuser</a></p>
                     @else
                       @if ($message->post->type_contrat == "3")
                         <p class="text-danger"> Vous avez validé cette candidature </p>

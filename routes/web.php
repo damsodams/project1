@@ -56,6 +56,6 @@ Route::group(['middleware'=>'auth','middleware'=>'entreprise'],function () {
   Route::get('front/maildestroy/{id}' , 'EntrepriseFrontController@mail_destroy')->name('mail_destroy');
   Route::get('front/accepter/{id}' , 'EntrepriseFrontController@candidature_accepter')->name('candidature_accepter');
   Route::get('front/refuser/{id}' , 'EntrepriseFrontController@candidature_refuser')->name('candidature_refuser');
-
+  Route::get('front/projet' , 'EntrepriseFrontController@projet_index')->name('projet_index');
 
 });
