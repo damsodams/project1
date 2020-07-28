@@ -7,6 +7,9 @@ use App\Entreprise;
 use App\developpeurs;
 use App\Message;
 use App\diplome;
+use App\sms;
+use App\user;
+use App\conversation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -80,6 +83,19 @@ class EntrepriseFrontController extends Controller
       $entrepriseName = auth::user()->entreprise->nom;
       return view("front.entreprise.projet.index")->with("lesOffres",$lesOffres)
                                                 ->with("entrepriseName",$entrepriseName);
+
+  }
+  public function conversation_index(){
+/*
+    $conversation = new conversation;
+        $conversation->title = 'God of War';
+        $conversation->save();
+
+        $conversation->users()->attach($user);*/
+$user = auth::user();
+      
+        return view("front.entreprise.conversation.index")->with("user",$user);
+
 
   }
 

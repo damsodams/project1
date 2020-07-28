@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="{{url('scss/perso.scss')}}">
   <link rel="stylesheet" href="{{url('plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
   <link rel="stylesheet" href="{{url('plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
 </head>
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
@@ -99,7 +102,7 @@
                           @foreach ($offre->postuler_offre as $post)
                             @if ($post->type_contrat == "1")
                               @php
-                                $i++;
+                              $i++;
                               @endphp
                             @endif
                           @endforeach
@@ -135,12 +138,12 @@
                     </a>
                   </li>
                 @elseif ($user->statut == "dev")
-                <li class="nav-item">
-                  <a href="{{route('profil_show')}}" class="nav-link @section('activemde') @show">
-                    <i class="fas fa-address-card"></i>
-                    <p>Mon Profil</p>
-                  </a>
-                </li>
+                  <li class="nav-item">
+                    <a href="{{route('profil_show')}}" class="nav-link @section('activemde') @show">
+                      <i class="fas fa-address-card"></i>
+                      <p>Mon Profil</p>
+                    </a>
+                  </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link @section('activempr') @show">
                       <i class="fas fa-laptop-code"></i>
@@ -182,27 +185,27 @@
     <script src="{{url('dist/js/pages/dashboard2.js')}}"></script>
 
 
-<script src="{{url('plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{url('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{url('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{url('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+    <script src="{{url('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{url('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{url('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{url('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
 
-<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
+    <script>
+    $(function () {
+      $("#example1").DataTable({
+        "responsive": true,
+        "autoWidth": false,
+      });
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
     });
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script>
+    </script>
   </body>
   </html>

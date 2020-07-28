@@ -49,6 +49,11 @@ Route::group(['middleware'=>'auth','middleware'=>'admin'],function () {
 });
 //Les routes pour les Entreprises du site -> BACK
 Route::group(['middleware'=>'auth','middleware'=>'entreprise'],function () {
+
+  Route::get('ajaxRequest', 'AjaxController@ajaxRequest');
+
+  Route::post('ajaxRequest', 'AjaxController@ajaxRequestPost')->name('ajaxRequest.post');
+
   //Route gestion des offres par l'entreprise
   Route::resource('front/offre_entreprise' , 'OffreEntrepriseController');
   Route::get('front/mail' , 'EntrepriseFrontController@mail_index')->name('mail_index');
@@ -57,5 +62,6 @@ Route::group(['middleware'=>'auth','middleware'=>'entreprise'],function () {
   Route::get('front/accepter/{id}' , 'EntrepriseFrontController@candidature_accepter')->name('candidature_accepter');
   Route::get('front/refuser/{id}' , 'EntrepriseFrontController@candidature_refuser')->name('candidature_refuser');
   Route::get('front/projet' , 'EntrepriseFrontController@projet_index')->name('projet_index');
+  Route::get('front/conversation' , 'EntrepriseFrontController@conversation_index')->name('conversation_index');
 
 });

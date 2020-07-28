@@ -10,10 +10,15 @@
       //Recuperation de l'etat de l'offre
       $candidat = false;
       $validate = false;
+      $candidaturefuser = false;
       foreach ($offre->postuler_offre as $postoffre ){
-        $candidat = true;
 
-        if ($postoffre->is_validate == true) {
+        if($postoffre->type_contrat != "4"){
+          $candidat = true;
+        } else {
+          $candidaturefuser = true;
+        }
+        if (($postoffre->is_validate == true) && ($postoffre->type_contrat == "3")) {
           $validate = true;
         }
       }
@@ -35,7 +40,6 @@
         $action = "Pas encore de candidat";
         $forcent = "35%";
       }
-
       @endphp
       <div class="card-info">
         <div class="info-box ">
@@ -66,7 +70,7 @@
           </div>
         @endif
         <!-- Si des candidat existe affichage de ceux ci : -->
-        @if ($candidat == true)
+        @if (($candidat == true) || ($candidaturefuser == true))
           <h3>Candidats:</h3><hr>
           <div class="row">
             @foreach ($offre->postuler_offre as $postoffre )
@@ -75,7 +79,9 @@
               </div>
               <div class="form-group col-md-6">
                 <div class="box-btn">
-                  <a class="btn btn-info" href="{{route('show_offre', ['id'=>$offre->id])}}">Voire le profil</a>
+                  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Voire le profil</button>
+                  <!-- Modal -->
+                  @include('front.entreprise.projet.modal_user')
                   @if ($postoffre->is_validate == false)
                     <a class="btn btn-success" onclick="return confirm('Tu as cliquer sur valider, est tu sûre de ton choix?')" href="{{route('candidature_accepter',['id'=>$offre->id])}}">Accepter</a>
                     <a class="btn btn-danger"  onclick="return confirm('Tu as cliquer sur refuser, est tu sûre de ton choix?')" href="{{route('candidature_refuser',['id'=>$offre->id])}}">Refuser</a>

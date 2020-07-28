@@ -29,18 +29,23 @@
   text-align: center;
 }
 @media (max-width: 700px){
-.table thead {
-display: none;
-}
+  .table thead {
+    display: none;
+  }
 
-.table tr{
-display: block;
-margin-bottom: 10px;
-}
+  .table tr{
+    display: block;
+    margin-bottom: 10px;
+  }
 
-.table td {
-display: block;
-text-align: center;
+  .table td {
+    display: block;
+    text-align: center;
+  }
+
 }
+.overlay-600{
+  overflow:auto;
+  height: 650px;
 
 }

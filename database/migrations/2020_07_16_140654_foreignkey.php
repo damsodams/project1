@@ -36,6 +36,10 @@ class Foreignkey extends Migration
       $table->foreign('destinatair_id')->references('id')->on('users')->onDelete('cascade');
       $table->foreign('post_id')->references('id')->on('postuler__offres')->onDelete('cascade');
     });
+    Schema::table('msgs', function (Blueprint $table) {
+      $table->foreign('conversation_id')->references('id')->on('conversations')->onDelete('cascade');
+    });
+
   }
 
   /**
