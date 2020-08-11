@@ -2,7 +2,6 @@
 @section('content')
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
   <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <br>
@@ -12,8 +11,7 @@
         <div class="row  overlay-600">
           <div class="col-md-12">
             @foreach ($user->conversation as $conv)
-              <!--  <div class="row" onclick="viewconv({{$conv->msgs}} , {{$conv->users}})">-->
-              <div class="row" >
+              <div class="row" onclick="viewconv({{$conv}})">
                 <div class="info-box ">
                   @foreach ($conv->users as $otheru)
                     @if ($user->id != $otheru->id)
@@ -27,80 +25,15 @@
                       <div class="info-box-content">
                         <span class="info-box-number">{{$otheru->name}}</span>
                         <span class="info-box-text ">{{$otheru->statut}}</span>
-                        <span title="3 New Messages" class="badge bg-warning">3 Nouveau message</span>
+                        <!--  <span title="3 New Messages" class="badge bg-warning">3 Nouveau message</span>-->
                       </div>
                     @endif
                   @endforeach
                 </div>
-                <button id="btn" value="{{$conv->id}}" class="btn btn-success btn-submit">Submit</button>
+
               </div>
             @endforeach
-            <script type="text/javascript">
-
-            $.ajaxSetup({
-              headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              }
-            });
-            $(".btn-submit").click(function(e){
-              e.preventDefault();
-              var id = document.getElementById('btn').value();
-              alert("je suis la");
-              $.ajax({
-                type:'POST',
-                url:"{{ route('ajaxRequest.post') }}",
-                data:{name:name, password:password, email:email},
-                success:function(data){
-                  alert(data.success.name);
-                }
-              });
-            });
-
-            function viewconv(conv , users){
-              usr =  <?php echo json_encode($user); ?>;
-              for (let i = 0; i < 2; i++) {
-                if (usr.id != users[i].id) {
-                  header.innerHTML = users[i].name;
-                }
-              }
-              var div ='';
-              for (var i = 0; i < conv.length; i++) {
-                if (conv[i].sender == usr.id) {
-                  div += '<div class="direct-chat-msg">';
-                  div += '<div class="direct-chat-infos clearfix">';
-                  div +=   '<span class="direct-chat-name float-left">'+conv[i].id+'</span>';
-                  div +=   '<span class="direct-chat-timestamp float-right">'+conv[i].created_at+'</span>';
-                  div +=   '</div>';
-                  div +=   '<img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="Message User Image">';
-                  div +=   '<div class="direct-chat-text">';
-                  div +=    conv[i].message;
-                  div +=   '  </div>';
-                  div +=   '  </div>';
-                }else {
-                  div +=  '<div class="direct-chat-msg right">';
-                  div +=    '<div class="direct-chat-infos clearfix">';
-                  div +=      '<span class="direct-chat-name float-right">'+conv[i].id+'</span>';
-                  div +=    '  <span class="direct-chat-timestamp float-left">'+conv[i].created_at+'</span>';
-                  div +=    '</div>';
-                  div +=    '<img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="Message User Image">';
-                  div +=  '    <div class="direct-chat-text">';
-                  div +=        conv[i].message;
-                  div +=      '</div>';
-                  div +=    '</div>';
-                }
-              }
-              document.getElementById("chat-div" ).innerHTML = div;
-            }
-            </script>
-
           </div>
-        </div>
-        <div class="card-footer">
-          <form action="#" method="post">
-            <span class="input-group-append">
-              <button style="width : 100%"type="submit" class="btn btn-primary">Nouvelle conversation</button>
-            </span>
-          </form>
         </div>
       </div>
       <div class="col-md-9">
@@ -127,14 +60,12 @@
                 </div>
               </div>
               <div class="card-footer">
-                <form action="#" method="post">
-                  <div class="input-group">
-                    <input type="text" name="message" placeholder="Type Message ..." class="form-control">
-                    <span class="input-group-append">
-                      <button type="submit" class="btn btn-primary">Send</button>
-                    </span>
-                  </div>
-                </form>
+                <div class="input-group">
+                  <input id="msg" type="text" name="message" placeholder="Type Message ..." class="form-control">
+                  <span class="input-group-append">
+                    <button id="btn" class="btn btn-success" onclick="send()">Envoyer</button>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -142,5 +73,112 @@
       </div>
     </div>
   </div>
+  <script type="text/javascript">
+  actualisation()
+//fonction ajax actualisation automatique
+function actualisation(){
+  if (document.getElementById('btn').value != ''){
+    var id = document.getElementById('btn').value;
+      $.ajax({
+        type:'POST',
+        url:"{{ route('ajaxRequest.sync') }}",
+        data: {
+          id : id,
+          _token: '{{csrf_token()}}'
+        },
+        dataType: 'JSON',
+        success:function(response){
+          console.log(response);
+          viewmessage(response);
+        },
+        error: function(){console.log('Erreur');}
+      });
+    }
+    setTimeout(actualisation,3000);
+  }
+//Fonction ajax de recuperation des messages
+function viewconv(conv){
+  $.ajax({
+    type:'POST',
+    url:"{{ route('ajaxRequest.sync') }}",
+    data: {
+      id : conv.id,
+      _token: '{{csrf_token()}}'
+    },
+    dataType: 'JSON',
+    success:function(response){
+      document.getElementById('btn').value = conv.id,
+      viewmessage(response);
+    },
+    error: function(){console.log('Erreur');}
+  });
+  return "ok";
+}
+//Fonction ajax de affichage des messages
+function viewmessage(response){
+  var usr =  <?php echo json_encode($user); ?>;
+  var conversation = response.conversation;
+  var conversation_user = response.conversation_user;
+  var messages = response.messages;
+  //Affichage du nom du destinataire
+  for (let i = 0; i < 2; i++) {
+    if (usr.id != conversation_user[i].id) {
+      header.innerHTML = conversation_user[i].name;
+    }
+  }
+  //affichage des message;
+  var div ='';
+  for (var i = 0; i < messages.length; i++) {
+    if (messages[i].sender == usr.id) {
+      div +=  '<div class="direct-chat-msg right">';
+      div +=    '<div class="direct-chat-infos clearfix">';
+      //  div +=      '<span class="direct-chat-name float-right">'+messages[i].id+'</span>';
+      div +=    '  <span class="direct-chat-timestamp float-left">'+messages[i].created_at+'</span>';
+      div +=    '</div>';
+      div +=    '<img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="Message User Image">';
+      div +=  '    <div class="direct-chat-text">';
+      div +=        messages[i].message;
+      div +=      '</div>';
+      div +=    '</div>';
+    }else {
+      div += '<div class="direct-chat-msg">';
+      div += '<div class="direct-chat-infos clearfix">';
+      //  div +=   '<span class="direct-chat-name float-left">'+messages[i].id+'</span>';
+      div +=   '<span class="direct-chat-timestamp float-right">'+messages[i].created_at+'</span>';
+      div +=   '</div>';
+      div +=   '<img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="Message User Image">';
+      div +=   '<div class="direct-chat-text">';
+      div +=    messages[i].message;
+      div +=   '  </div>';
+      div +=   '  </div>';
+    }
+  }
+  document.getElementById("chat-div" ).innerHTML = div;
+}
+//Fonction envoie de message;
+function send(){
+  var message = document.getElementById('msg').value;
+  var conversation_id = document.getElementById('btn').value;
+
+  $.ajax({
+    type:'POST',
+    url:"{{ route('ajaxRequest.post') }}",
+    data: {
+      message: message,
+      conversation_id: conversation_id,
+      _token: '{{csrf_token()}}'
+    },
+    dataType: 'JSON',
+    success:function(response){
+      viewmessage(response);
+      document.getElementById('msg').value = '';
+    },
+    error: function(){console.log('Erreur');}
+  });
+}
+
+</script>
+
+
 
 @endsection

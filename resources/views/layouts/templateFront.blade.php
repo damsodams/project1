@@ -114,7 +114,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{route('mail_index')}}" class="nav-link @section('activemail') @show">
+                    <a href="{{route('ajaxRequest.index')}}" class="nav-link @section('activemail') @show">
                       <i class="fa fa-comments"></i>
                       <p>Mes Conversation</p>
                     </a>

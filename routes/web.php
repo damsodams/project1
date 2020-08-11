@@ -50,8 +50,8 @@ Route::group(['middleware'=>'auth','middleware'=>'admin'],function () {
 //Les routes pour les Entreprises du site -> BACK
 Route::group(['middleware'=>'auth','middleware'=>'entreprise'],function () {
 
-  Route::get('ajaxRequest', 'AjaxController@ajaxRequest');
-
+  Route::get('ajaxRequest', 'AjaxController@ajaxRequest')->name('ajaxRequest.index');
+  Route::post('ajaxRequest/conv', 'AjaxController@ajaxRequestSync')->name('ajaxRequest.sync');
   Route::post('ajaxRequest', 'AjaxController@ajaxRequestPost')->name('ajaxRequest.post');
 
   //Route gestion des offres par l'entreprise
