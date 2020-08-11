@@ -8,6 +8,9 @@ use App\message;
 use App\User;
 use App\Diplome;
 use App\Experience;
+use App\Conversation;
+use App\Conversation_user;
+use App\msg;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -93,6 +96,33 @@ class DeveloppeurFrontController extends Controller
     $message->is_post = true;
     $message->post_id = $postuler->id;
     $message->save();
+
+    //creation de la conversation et envoie message
+    $convs = Conversation::all();
+    $test = 0;
+    foreach ($convs as $conv ) {
+      for ($i=0; $i < 2; $i++) {
+          if($conv->users[$i]->id == auth::user()->id){
+            $test++;
+          }
+          if($conv->users[$i]->id == $destinataire->id){
+            $test++;
+          }
+      }
+    }
+
+    if($test != '2' ){
+      $conversation = new Conversation;
+      $conversation->title = "tatata";
+      $conversation->save();
+      $conversation->users()->attach(auth::user());
+      $conversation->users()->attach($destinataire);
+      $msg = new msg;
+      $msg->message = "Bonjour, l'utilisateur " . auth::user()->name . "a posulé a votre offre : ". $offre->titre." nésiter pas à lui envoyer un message ;)";
+      $msg->sender = auth::user()->id;
+      $msg->conversation_id = $conversation->id;
+      $msg->save();
+    }
 
     return redirect()->route("offre_entreprise.index");
   }
