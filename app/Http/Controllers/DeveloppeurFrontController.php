@@ -84,7 +84,7 @@ class DeveloppeurFrontController extends Controller
     $postuler->offre_id = $id;
     $postuler->developpeur_id = $dev_id;
     $postuler->type_contrat = "1";
-    $postuler->save();
+  //  $postuler->save();
 
     //Creation du Message
     $message = new Message;
@@ -102,16 +102,12 @@ class DeveloppeurFrontController extends Controller
     $test = 0;
     foreach ($convs as $conv ) {
       for ($i=0; $i < 2; $i++) {
-          if($conv->users[$i]->id == auth::user()->id){
-            $test++;
-          }
-          if($conv->users[$i]->id == $destinataire->id){
-            $test++;
+          if(($conv->users[$i]->id == auth::user()->id)||($conv->users[$i]->id == $destinataire_id)){
+$test++;
           }
       }
     }
-
-    if($test != '2' ){
+    if($test < '2' ){
       $conversation = new Conversation;
       $conversation->title = "tatata";
       $conversation->save();
@@ -122,6 +118,8 @@ class DeveloppeurFrontController extends Controller
       $msg->sender = auth::user()->id;
       $msg->conversation_id = $conversation->id;
       $msg->save();
+    }else {
+      // Filtre
     }
 
     return redirect()->route("offre_entreprise.index");
