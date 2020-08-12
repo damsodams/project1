@@ -138,6 +138,7 @@
                     </a>
                   </li>
                 @elseif ($user->statut == "dev")
+
                   <li class="nav-item">
                     <a href="{{route('profil_show')}}" class="nav-link @section('activemde') @show">
                       <i class="fas fa-address-card"></i>
@@ -148,6 +149,12 @@
                     <a href="#" class="nav-link @section('activempr') @show">
                       <i class="fas fa-laptop-code"></i>
                       <p>Mes Projets</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('ajaxRequestDev.index')}}" class="nav-link @section('activemail') @show">
+                      <i class="fa fa-comments"></i>
+                      <p>Mes Conversation</p>
                     </a>
                   </li>
                   <li class="nav-item">

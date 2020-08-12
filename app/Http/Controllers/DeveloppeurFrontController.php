@@ -84,7 +84,7 @@ class DeveloppeurFrontController extends Controller
     $postuler->offre_id = $id;
     $postuler->developpeur_id = $dev_id;
     $postuler->type_contrat = "1";
-  //  $postuler->save();
+    $postuler->save();
 
     //Creation du Message
     $message = new Message;
@@ -99,27 +99,38 @@ class DeveloppeurFrontController extends Controller
 
     //creation de la conversation et envoie message
     $convs = Conversation::all();
+    $conv_ec;
     $test = 0;
+      //Test si une conversation existe deja
     foreach ($convs as $conv ) {
+      $test = 0;
       for ($i=0; $i < 2; $i++) {
-          if(($conv->users[$i]->id == auth::user()->id)||($conv->users[$i]->id == $destinataire_id)){
-$test++;
-          }
+        if(($conv->users[$i]->id == auth::user()->id)||($conv->users[$i]->id == $destinataire_id)){
+          $test++;
+        }
+      }
+      if ($test = 2){
+        $conv_ec = $conv;
+        break;
       }
     }
-    if($test < '2' ){
+    if($test < '2' ){ //aucune conversation n'existe
       $conversation = new Conversation;
       $conversation->title = "tatata";
       $conversation->save();
       $conversation->users()->attach(auth::user());
       $conversation->users()->attach($destinataire);
       $msg = new msg;
-      $msg->message = "Bonjour, l'utilisateur " . auth::user()->name . "a posulé a votre offre : ". $offre->titre." nésiter pas à lui envoyer un message ;)";
+      $msg->message = "Bonjour, l'utilisateur " . auth::user()->name . " a posulé a votre offre : ". $offre->titre." nésiter pas à lui envoyer un message ;)";
       $msg->sender = auth::user()->id;
       $msg->conversation_id = $conversation->id;
       $msg->save();
-    }else {
-      // Filtre
+    }else { //une conversation est deja existante
+      $msg = new msg;
+      $msg->message = "Bonjour, l'utilisateur " . auth::user()->name . " a posulé a votre offre : ". $offre->titre." nésiter pas à lui envoyer un message ;)";
+      $msg->sender = auth::user()->id;
+      $msg->conversation_id = $conv_ec->id;
+      $msg->save();
     }
 
     return redirect()->route("offre_entreprise.index");
@@ -130,8 +141,56 @@ $test++;
     $experiences = Experience::where('developpeur_id',$dev_id)->get();
     $user =  auth::user();
     return view("front.developpeur.profil")->with('diplomes', $diplomes)
-                                           ->with('experiences', $experiences)
-                                           ->with('user',$user);
+    ->with('experiences', $experiences)
+    ->with('user',$user);
+  }
+  /**
+   * Create a new controller instance.
+   *
+   * @return void
+   */
+  public function ajaxRequest()
+  {
+      $user =  auth::user();
+      return view('front.developpeur.conversation')->with('user', $user);
+  }
+  /**
+   * Create a new controller instance.
+   *
+   * @return void
+   */
+  public function ajaxRequestPost(Request $request)
+  {
+    //Verification des champs
+    $request->validate([
+     'message'       => 'required|max:255',
+     'conversation_id' => 'required',
+   ]);
+
+   $user =  auth::user();
+
+   $msg = new msg;
+   $msg->message = $request->message;
+   $msg->sender = $user->id;
+   $msg->conversation_id = $request->conversation_id;
+   $msg->save();
+
+   $conversation = conversation::find($request->conversation_id);
+
+    return response()->json(['messages' => $conversation->msgs, 'conversation_user' => $conversation->users , 'conversation' => $conversation]);
+  }
+  /**
+   * Create a new controller instance.
+   *
+   * @return void
+   */
+  public function ajaxRequestSync(Request $request)
+  {
+
+    $conversation = conversation::find($request->id);
+
+
+    return response()->json( ['messages' => $conversation->msgs, 'conversation_user' => $conversation->users , 'conversation' => $conversation]);
   }
 
 }

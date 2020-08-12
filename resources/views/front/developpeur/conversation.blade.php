@@ -18,7 +18,7 @@
                       @if ( $otheru->statut == "dev")
                         <span class="info-box-icon timeline-logoentreprise"><img src="{{url($otheru->developpeur->photo)}}"> </span>
                       @elseif ($otheru->statut == "entreprise")
-                        <span class="info-box-icon timeline-logoentreprise"><img src="{{url($user->entreprise->logo)}}"> </span>
+                        <span class="info-box-icon timeline-logoentreprise"><img src="{{url($otheru->entreprise->logo)}}"> </span>
                       @elseif ($otheru->statut == "admin")
                         <span class="info-box-icon timeline-logoentreprise"><img src="{{url('/images/admin.png')}}"> </span>
                       @endif
@@ -68,16 +68,13 @@
   </div>
   <script type="text/javascript">
   actualisation()
-
-
-
   //fonction ajax actualisation automatique
   function actualisation(){
     if (document.getElementById('btn').value != ''){
       var id = document.getElementById('btn').value;
       $.ajax({
         type:'POST',
-        url:"{{ route('ajaxRequest.sync') }}",
+        url:"{{ route('ajaxRequestDev.sync') }}",
         data: {
           id : id,
           _token: '{{csrf_token()}}'
@@ -96,7 +93,7 @@
   function viewconv(conv){
     $.ajax({
       type:'POST',
-      url:"{{ route('ajaxRequest.sync') }}",
+      url:"{{ route('ajaxRequestDev.sync') }}",
       data: {
         id : conv.id,
         _token: '{{csrf_token()}}'
@@ -116,24 +113,21 @@
     var conversation = response.conversation;
     var conversation_user = response.conversation_user;
     var messages = response.messages;
-    var username ='';
-
-
     //Affichage du nom du destinataire
     for (let i = 0; i < 2; i++) {
       if (usr.id != conversation_user[i].id) {
         header.innerHTML = conversation_user[i].name;
-        $username = conversation_user[i].name;
+
       }
     }
     //affichage des message;
+
     var div ='';
     for (var i = 0; i < messages.length; i++) {
       //Mise en forme de la date et heure :
       var datetimes = messages[i].created_at.split("T");
       var date = datetimes[0];
       var heure = datetimes[1].split('.')[0];
-
 
       if (messages[i].sender == usr.id) {
         div +=  '<div class="direct-chat-msg right">';
@@ -169,7 +163,7 @@
 
     $.ajax({
       type:'POST',
-      url:"{{ route('ajaxRequest.post') }}",
+      url:"{{ route('ajaxRequestDev.post') }}",
       data: {
         message: message,
         conversation_id: conversation_id,

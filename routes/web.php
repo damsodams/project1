@@ -31,6 +31,10 @@ Route::group(['middleware'=>'auth'],function () {
   Route::resource('front/diplome', 'DiplomeController');
   //route ressource gestion des experience professionnel
   Route::resource('back/experience', 'ExperienceController');
+
+  Route::get('Conversation', 'DeveloppeurFrontController@ajaxRequest')->name('ajaxRequestDev.index');
+  Route::post('Conversation/conv', 'DeveloppeurFrontController@ajaxRequestSync')->name('ajaxRequestDev.sync');
+  Route::post('Conversation', 'DeveloppeurFrontController@ajaxRequestPost')->name('ajaxRequestDev.post');
 });
 //Les routes pour les Admins du site -> BACK
 Route::group(['middleware'=>'auth','middleware'=>'admin'],function () {
