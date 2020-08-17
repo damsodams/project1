@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
       'name'=> 'entreprise',
       'email'=> 'entreprise@gmail.com',
       'password'=> bcrypt('entreprise'),
+      'image_profil'=> 'seed/images/lacoste.png',
       'statut'=> 'entreprise',
       'entreprise_id' => '1',
     ]);
@@ -29,8 +30,9 @@ class UserSeeder extends Seeder
       'name'=> 'dev',
       'email'=> 'dev@gmail.com',
       'password'=> bcrypt('dev'),
+      'image_profil'=> 'seed/images/developpeur.png',
       'statut'=> 'dev',
-      'developpeur_id' => '1' 
+      'developpeur_id' => '1'
     ]);
     }
 }

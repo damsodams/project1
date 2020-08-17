@@ -75,6 +75,7 @@ class DeveloppeurController extends Controller
     public function update(Request $request, $id)
     {
       $dev = Developpeur::find($id);
+      $user = $dev->user;
       $dev->competence = $request->input("competence");
       $rand = Str::random(10);
       $cv_upload = $request->file('cv');
@@ -93,6 +94,8 @@ class DeveloppeurController extends Controller
         $photo_get = 'img\\' . $photo_nommage;
         if (($photo_upload->move('img', $photo_nommage)) ) {
           $dev->photo = $photo_get;
+          $user->image_profil = $photo_get;
+          $user->save();
         }
       }
       $dev->adresse = $request->input("adresse");

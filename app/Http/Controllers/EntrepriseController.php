@@ -75,16 +75,19 @@ class EntrepriseController extends Controller
   public function update(Request $request, $id)
   {
     $entreprise = Entreprise::find($id);
+    $user = $entreprise->user;
     $entreprise->nom = $request->input("nome");
     $rand = Str::random(10);
     $img_upload = $request->file('logo');
     if($img_upload != NULL){
-      unlink(public_path($entreprise->logo));
+    //  unlink(public_path($entreprise->logo));
       $img_nommage = date('Y-m-d') . ' - ' . $rand .' - '. $img_upload->getClientOriginalName();
       $img_get = 'img\\' . $img_nommage;
       if ($img_upload) {
         if ($img_upload->move('img', $img_nommage)) {
           $entreprise->logo = $img_get;
+          $user->image_profil = $img_get;
+          $user->save();
         }
       }
     }

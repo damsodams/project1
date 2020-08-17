@@ -13,12 +13,12 @@
       $candidaturefuser = false;
       foreach ($offre->postuler_offre as $postoffre ){
 
-        if($postoffre->type_contrat != "4"){
+        if($postoffre->statut != "4"){
           $candidat = true;
         } else {
           $candidaturefuser = true;
         }
-        if (($postoffre->is_validate == true) && ($postoffre->type_contrat == "3")) {
+        if (($postoffre->is_validate == true) && ($postoffre->statut == "3")) {
           $validate = true;
         }
       }
@@ -85,8 +85,8 @@
                   @if ($postoffre->is_validate == false)
                     <a class="btn btn-success" onclick="return confirm('Tu as cliquer sur valider, est tu sûre de ton choix?')" href="{{route('candidature_accepter',['id'=>$offre->id])}}">Accepter</a>
                     <a class="btn btn-danger"  onclick="return confirm('Tu as cliquer sur refuser, est tu sûre de ton choix?')" href="{{route('candidature_refuser',['id'=>$offre->id])}}">Refuser</a>
-                  @elseif ($postoffre->type_contrat == '3')
-                    <a class="btn btn-success"  href="#">Contacter</a>
+                  @elseif ($postoffre->statut == '3')
+                    <a class="btn btn-success"  href="{{route('ajaxRequest.index')}}">Contacter</a>
                     <p class="text-success"> Vous avez Accepté cette candidature </p>
                   @else
                     <p class="text-danger"> Vous avez Refusé cette candidature </p>

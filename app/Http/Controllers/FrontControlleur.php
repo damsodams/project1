@@ -20,4 +20,20 @@ class FrontControlleur extends Controller
     ->with('OffresPostuler', $OffresPostuler);
 
   }
+  public function recherche(Request $request){
+    if (auth()->guest()) {
+        $lesOffres = Offre::where('titre', 'like', '%'.$request->input('search').'%')->orderBy('created_at' , 'DESC', 'updated_at' ,'DESC')->get();
+        $countOffres = $lesOffres->count();
+        return view ('front.index')->with('lesoffres', $lesOffres)
+        ->with('countOffres', $countOffres);
+    }
+    $devid = auth::user()->developpeur_id;
+    $lesOffres = Offre::where('titre', 'like', '%'.$request->input('search').'%')->orderBy('created_at' , 'DESC', 'updated_at' ,'DESC')->get();
+    $countOffres = $lesOffres->count();
+    $OffresPostuler = Postuler_offre::all()->where('developpeur_id',$devid);
+    return view ('front.index')->with('lesoffres', $lesOffres)
+    ->with('OffresPostuler', $OffresPostuler)
+    ->with('countOffres', $countOffres);
+
+  }
 }

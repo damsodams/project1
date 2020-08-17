@@ -3,7 +3,7 @@
   <br>
   @foreach ($OffresPostuler as $offre)
     @php
-    switch ($offre->type_contrat) {
+    switch ($offre->statut) {
       case 0:
       $forcent = "0%";
       $action = "Candidature non transmise";
@@ -47,7 +47,7 @@
           </span>
         </div>
       </div>
-      @if ($offre->type_contrat == "3")
+      @if ($offre->statut == "3")
         <div class="info-box ">
           <div class="info-box-content">
             <p> Contact entreprise: </p>

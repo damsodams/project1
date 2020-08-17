@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
       $table->string('email')->unique();
       $table->timestamp('email_verified_at')->nullable();
       $table->string('password');
+      $table->string('image_profil')->nullable();
       $table->enum('statut', array ('dev', 'admin','entreprise'))->default('dev');
       $table->bigInteger('entreprise_id')->unsigned()->nullable();
       $table->bigInteger('developpeur_id')->unsigned()->nullable();

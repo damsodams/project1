@@ -19,6 +19,8 @@ Route::get('/', 'FrontControlleur@index')->name('front');
 Route::get('/home', 'FrontControlleur@index')->name('home');
 //Les routes pour les Utilisateurs du site -> FRONT
 Route::group(['middleware'=>'auth'],function () {
+  //route recherche offre_entreprise
+  Route::post('front/result', 'FrontControlleur@recherche')->name('recherche');
   //route action postuler
   Route::get('front/postuler/{id}', 'DeveloppeurFrontController@postuler')->name('postuler_offre');
   //Route affichage de l'offre séléctionner

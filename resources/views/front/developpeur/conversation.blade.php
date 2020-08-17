@@ -49,7 +49,7 @@
                 </div>
               </div>
               <div class="card-body">
-                <div id="chat-div" class="direct-chat-messages">
+                <div id="chat-div"class="direct-chat-messages">
                 </div>
               </div>
               <div class="card-footer">
@@ -65,120 +65,126 @@
         </div>
       </div>
     </div>
-  </div>
-  <script type="text/javascript">
-  actualisation()
-  //fonction ajax actualisation automatique
-  function actualisation(){
-    if (document.getElementById('btn').value != ''){
-      var id = document.getElementById('btn').value;
+
+    <script type="text/javascript">
+    actualisation()
+    function scrolldiv() {
+      document.getElementById('chat-div').scrollTop = 1000;
+    }
+    //fonction ajax actualisation automatique
+    function actualisation(){
+      scrolldiv();
+      if (document.getElementById('btn').value != ''){
+        var id = document.getElementById('btn').value;
+        $.ajax({
+          type:'POST',
+          url:"{{ route('ajaxRequestDev.sync') }}",
+          data: {
+            id : id,
+            _token: '{{csrf_token()}}'
+          },
+          dataType: 'JSON',
+          success:function(response){
+            console.log(response);
+            viewmessage(response);
+          },
+          error: function(){console.log('Erreur');}
+        });
+      }
+      setTimeout(actualisation,3000);
+    }
+    //Fonction ajax de recuperation des messages
+    function viewconv(conv){
       $.ajax({
         type:'POST',
         url:"{{ route('ajaxRequestDev.sync') }}",
         data: {
-          id : id,
+          id : conv.id,
           _token: '{{csrf_token()}}'
         },
         dataType: 'JSON',
         success:function(response){
-          console.log(response);
+          document.getElementById('btn').value = conv.id,
           viewmessage(response);
         },
         error: function(){console.log('Erreur');}
       });
+      return "ok";
     }
-    setTimeout(actualisation,3000);
-  }
-  //Fonction ajax de recuperation des messages
-  function viewconv(conv){
-    $.ajax({
-      type:'POST',
-      url:"{{ route('ajaxRequestDev.sync') }}",
-      data: {
-        id : conv.id,
-        _token: '{{csrf_token()}}'
-      },
-      dataType: 'JSON',
-      success:function(response){
-        document.getElementById('btn').value = conv.id,
-        viewmessage(response);
-      },
-      error: function(){console.log('Erreur');}
-    });
-    return "ok";
-  }
-  //Fonction ajax de affichage des messages
-  function viewmessage(response){
-    var usr =  <?php echo json_encode($user); ?>;
-    var conversation = response.conversation;
-    var conversation_user = response.conversation_user;
-    var messages = response.messages;
-    //Affichage du nom du destinataire
-    for (let i = 0; i < 2; i++) {
-      if (usr.id != conversation_user[i].id) {
-        header.innerHTML = conversation_user[i].name;
-
+    //Fonction ajax de affichage des messages
+    function viewmessage(response){
+      var usr =  <?php echo json_encode($user); ?>;
+      var conversation = response.conversation;
+      var conversation_user = response.conversation_user;
+      var messages = response.messages;
+      var destinataire = '';
+      //Affichage du nom du destinataire
+      for (let i = 0; i < 2; i++) {
+        if (usr.id != conversation_user[i].id) {
+          header.innerHTML = conversation_user[i].name;
+          destinataire  = conversation_user[i];
+        }
       }
-    }
-    //affichage des message;
+      //affichage des message;
 
-    var div ='';
-    for (var i = 0; i < messages.length; i++) {
-      //Mise en forme de la date et heure :
-      var datetimes = messages[i].created_at.split("T");
-      var date = datetimes[0];
-      var heure = datetimes[1].split('.')[0];
+      var div ='';
+      for (var i = 0; i < messages.length; i++) {
+        //Mise en forme de la date et heure :
+        var datetimes = messages[i].created_at.split("T");
+        var date = datetimes[0];
+        var heure = datetimes[1].split('.')[0];
 
-      if (messages[i].sender == usr.id) {
-        div +=  '<div class="direct-chat-msg right">';
-        div +=    '<div class="direct-chat-infos clearfix">';
-        //  div +=      '<span class="direct-chat-name float-right">'+messages[i].id+'</span>';
-        div +=    '  <span class="direct-chat-timestamp float-left">'+date +' '+heure +'</span>';
-        div +=    '</div>';
-        div +=    '<img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="Message User Image">';
-        div +=  '    <div class="direct-chat-text">';
-        div +=        messages[i].message;
-        div +=      '</div>';
-        div +=    '</div>';
-      }else {
-        div += '<div class="direct-chat-msg">';
-        div += '<div class="direct-chat-infos clearfix">';
-        //div +=   '<span class="direct-chat-name float-left">'+$username+'</span>';
-        div +=   '<span class="direct-chat-timestamp float-right">'+date +' '+heure +'</span>';
-        div +=   '</div>';
-        div +=   '<img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="Message User Image">';
-        div +=   '<div class="direct-chat-text">';
-        div +=    messages[i].message;
-        div +=   '  </div>';
-        div +=   '  </div>';
+        if (messages[i].sender == usr.id) {
+          div +=  '<div class="direct-chat-msg right">';
+          div +=    '<div class="direct-chat-infos clearfix">';
+          //  div +=      '<span class="direct-chat-name float-right">'+messages[i].id+'</span>';
+          div +=    '  <span class="direct-chat-timestamp float-left">'+date +' '+heure +'</span>';
+          div +=    '</div>';
+          div +=    '<img class="direct-chat-img" src="'+ usr.image_profil+'" alt="Message User Image">';
+          div +=  '    <div class="direct-chat-text">';
+          div +=        messages[i].message;
+          div +=      '</div>';
+          div +=    '</div>';
+        }else {
+          div += '<div class="direct-chat-msg">';
+          div += '<div class="direct-chat-infos clearfix">';
+          //div +=   '<span class="direct-chat-name float-left">'+$username+'</span>';
+          div +=   '<span class="direct-chat-timestamp float-right">'+date +' '+heure +'</span>';
+          div +=   '</div>';
+          div +=   '<img class="direct-chat-img" src="'+ destinataire.image_profil+'" alt="Message User Image">';
+          div +=   '<div class="direct-chat-text">';
+          div +=    messages[i].message;
+          div +=   '  </div>';
+          div +=   '  </div>';
+        }
       }
+      document.getElementById("chat-div" ).innerHTML = div;
+      scrolldiv();
     }
-    document.getElementById("chat-div" ).innerHTML = div;
-  }
 
-  //Fonction envoie de message;
-  function send(){
-    var message = document.getElementById('msg').value;
-    var conversation_id = document.getElementById('btn').value;
+    //Fonction envoie de message;
+    function send(){
+      var message = document.getElementById('msg').value;
+      var conversation_id = document.getElementById('btn').value;
 
-    $.ajax({
-      type:'POST',
-      url:"{{ route('ajaxRequestDev.post') }}",
-      data: {
-        message: message,
-        conversation_id: conversation_id,
-        _token: '{{csrf_token()}}'
-      },
-      dataType: 'JSON',
-      success:function(response){
-        viewmessage(response);
-        document.getElementById('msg').value = '';
-      },
-      error: function(){console.log('Erreur');}
-    });
-  }
+      $.ajax({
+        type:'POST',
+        url:"{{ route('ajaxRequestDev.post') }}",
+        data: {
+          message: message,
+          conversation_id: conversation_id,
+          _token: '{{csrf_token()}}'
+        },
+        dataType: 'JSON',
+        success:function(response){
+          viewmessage(response);
+          document.getElementById('msg').value = '';
+        },
+        error: function(){console.log('Erreur');}
+      });
+    }
 
-</script>
+  </script>
 
 
 

@@ -60,6 +60,7 @@ class UserController extends Controller
         if ($img_upload) {
           if ($img_upload->move('img', $img_nommage)) {
             $entreprise->logo = $img_get;
+            $user->image_profil = $img_get;
           }
         } else {
           return redirect()->route('offres.index')->withStatus(__('Problème lors de l\'upload du PDF, veuillez essayer à nouveau.'));
@@ -90,6 +91,7 @@ class UserController extends Controller
         if (($cv_upload->move('pdf', $cv_nommage)) && ($photo_upload->move('img', $photo_nommage)) ) {
           $dev->cv = $cv_get;
           $dev->photo = $photo_get;
+          $user->image_profil = $photo_get;
         }
       } else {
         return redirect()->route('offres.index')->withStatus(__('Problème lors de l\'upload du PDF, veuillez essayer à nouveau.'));

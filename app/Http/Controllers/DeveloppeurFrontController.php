@@ -83,7 +83,7 @@ class DeveloppeurFrontController extends Controller
     $postuler = new Postuler_offre;
     $postuler->offre_id = $id;
     $postuler->developpeur_id = $dev_id;
-    $postuler->type_contrat = "1";
+    $postuler->statut = "1";
     $postuler->save();
 
     //Creation du Message

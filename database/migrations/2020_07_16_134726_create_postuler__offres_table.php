@@ -17,7 +17,7 @@ class CreatePostulerOffresTable extends Migration
             $table->id();
             $table->bigInteger('offre_id')->unsigned();
             $table->bigInteger('developpeur_id')->unsigned();
-            $table->enum('type_contrat', array ('0' , '1' , '2' , "3" , "4"))->default('0');
+            $table->enum('statut', array ('0' , '1' , '2' , "3" , "4"))->default('0');
             $table->boolean('is_validate')->default(false);
             $table->timestamps();
         });

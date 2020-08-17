@@ -42,11 +42,6 @@
             <div  class="card card-prirary cardutline direct-chat direct-chat-primary">
               <div class="card-header">
                 <h3 class="card-title"  id="header" >Direct Chat</h3>
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
               </div>
               <div class="card-body">
                 <div id="chat-div" class="direct-chat-messages">
@@ -70,9 +65,12 @@
   actualisation()
 
 
-
+  function scrolldiv() {
+    document.getElementById('chat-div').scrollTop = 1000;
+  }
   //fonction ajax actualisation automatique
   function actualisation(){
+    scrolldiv();
     if (document.getElementById('btn').value != ''){
       var id = document.getElementById('btn').value;
       $.ajax({
@@ -116,16 +114,17 @@
     var conversation = response.conversation;
     var conversation_user = response.conversation_user;
     var messages = response.messages;
-    var username ='';
+    var destinataire ='';
 
-
-    //Affichage du nom du destinataire
+    //Recuperation des info destinataire
     for (let i = 0; i < 2; i++) {
       if (usr.id != conversation_user[i].id) {
         header.innerHTML = conversation_user[i].name;
-        $username = conversation_user[i].name;
+        destinataire = conversation_user[i];
       }
     }
+
+
     //affichage des message;
     var div ='';
     for (var i = 0; i < messages.length; i++) {
@@ -134,14 +133,13 @@
       var date = datetimes[0];
       var heure = datetimes[1].split('.')[0];
 
-
       if (messages[i].sender == usr.id) {
         div +=  '<div class="direct-chat-msg right">';
         div +=    '<div class="direct-chat-infos clearfix">';
         //  div +=      '<span class="direct-chat-name float-right">'+messages[i].id+'</span>';
         div +=    '  <span class="direct-chat-timestamp float-left">'+date +' '+heure +'</span>';
         div +=    '</div>';
-        div +=    '<img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="Message User Image">';
+        div +=    '<img class="direct-chat-img" src="'+ usr.image_profil +'" alt="Message User Image">';
         div +=  '    <div class="direct-chat-text">';
         div +=        messages[i].message;
         div +=      '</div>';
@@ -152,7 +150,7 @@
         //div +=   '<span class="direct-chat-name float-left">'+$username+'</span>';
         div +=   '<span class="direct-chat-timestamp float-right">'+date +' '+heure +'</span>';
         div +=   '</div>';
-        div +=   '<img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="Message User Image">';
+        div +=   '<img class="direct-chat-img" src="'+ destinataire.image_profil +'" alt="Message User Image">';
         div +=   '<div class="direct-chat-text">';
         div +=    messages[i].message;
         div +=   '  </div>';
@@ -160,6 +158,7 @@
       }
     }
     document.getElementById("chat-div" ).innerHTML = div;
+    scrolldiv();
   }
 
   //Fonction envoie de message;

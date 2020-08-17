@@ -95,7 +95,7 @@ class PostulerController extends Controller
         $postuler = new Postuler_offre;
         $postuler->offre_id = $id;
         $postuler->developpeur_id = $dev_id;
-        $postuler->type_contrat = "1";
+        $postuler->statut = "1";
         $postuler->save();
         return redirect()->route("offre_entreprise.index");
     }

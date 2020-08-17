@@ -44,8 +44,8 @@ class EntrepriseFrontController extends Controller
     $message->save();
     //Indique a l'utilisateur que la demande a ete lue :
     $post = Postuler_offre::find($message->post->id);
-    if($post->type_contrat == "1" ){
-      $post->type_contrat = "2";
+    if($post->statut == "1" ){
+      $post->statut = "2";
     }
     $post->save();
 
@@ -53,24 +53,28 @@ class EntrepriseFrontController extends Controller
   }
   public function candidature_accepter($id){
     $post = Postuler_offre::find($id);
-    $post->type_contrat = "3";
+    $post->statut = "3";
     $post->is_validate = true;
     $post->save();
+
+    return redirect()->route("projet_index");
   }
   public function candidature_refuser($id){
 
     $post = Postuler_offre::find($id);
-    $post->type_contrat = "4";
+    $post->statut = "4";
     $post->is_validate = true;
     $post->save();
+
+    return redirect()->route("projet_index");
   }
   public function mail_destroy($id){
     $value = explode(',',$id);
     foreach ($value as $val) {
       $message = Message::find($val);
-      if($message->post->type_contrat != "3"){
+      if($message->post->statut != "3"){
         $post = postuler_offre::find($message->post->id);
-        $post->type_contrat = '4';
+        $post->statut = '4';
         $post->save();
       }
       $message->delete();
@@ -78,27 +82,17 @@ class EntrepriseFrontController extends Controller
     return redirect()->route("mail_index");
   }
   public function projet_index(){
-      $entrepriseUser = auth::user()->entreprise_id;
-      $lesOffres = Offre::All()->where('entreprise_id',$entrepriseUser);
-      $entrepriseName = auth::user()->entreprise->nom;
-      return view("front.entreprise.projet.index")->with("lesOffres",$lesOffres)
-                                                ->with("entrepriseName",$entrepriseName);
+    $entrepriseUser = auth::user()->entreprise_id;
+    $lesOffres = Offre::All()->where('entreprise_id',$entrepriseUser);
+    $entrepriseName = auth::user()->entreprise->nom;
 
+    return view("front.entreprise.projet.index")->with("lesOffres",$lesOffres)
+    ->with("entrepriseName",$entrepriseName);
   }
+
   public function conversation_index(){
-/*
-    $conversation = new conversation;
-        $conversation->title = 'God of War';
-        $conversation->save();
+    $user = auth::user();
 
-        $conversation->users()->attach($user);*/
-$user = auth::user();
-      
-        return view("front.entreprise.conversation.index")->with("user",$user);
-
-
+    return view("front.entreprise.conversation.index")->with("user",$user);
   }
-
-
-
 }
