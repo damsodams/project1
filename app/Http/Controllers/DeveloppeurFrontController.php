@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Postuler_offre;
+use App\Postuler_Offre;
 use App\Offre;
 use App\developpeurs;
 use App\message;
@@ -24,7 +24,7 @@ class DeveloppeurFrontController extends Controller
   public function index()
   {
     $devid = auth::user()->developpeur_id;
-    $OffresPostuler = Postuler_offre::all()->where('developpeur_id',$devid);
+    $OffresPostuler = Postuler_Offre::all()->where('developpeur_id',$devid);
     return view("front.developpeur.demande")->with("OffresPostuler",$OffresPostuler);
   }
 
@@ -37,7 +37,7 @@ class DeveloppeurFrontController extends Controller
   public function show($id)
   {
     $dev_id = auth::user()->developpeur_id;
-    $lesoffresuser = Postuler_offre::all()->where('developpeur_id',$dev_id);
+    $lesoffresuser = Postuler_Offre::all()->where('developpeur_id',$dev_id);
     $test = false;
     foreach ($lesoffresuser as $offre) {
       if($id == $offre->offre_id){
@@ -68,7 +68,7 @@ class DeveloppeurFrontController extends Controller
   public function postuler($id)
   {
     $dev_id = auth::user()->developpeur_id;
-    $lesoffresuser = Postuler_offre::all()->where('developpeur_id',$dev_id);
+    $lesoffresuser = Postuler_Offre::all()->where('developpeur_id',$dev_id);
     foreach ($lesoffresuser as $offre) {
       if($id == $offre->offre_id){
         return redirect()->route("offre_entreprise.index");
@@ -80,7 +80,7 @@ class DeveloppeurFrontController extends Controller
     $destinataire_id = $destinataire[0]->id;
 
     //Ajout Objet postuler
-    $postuler = new Postuler_offre;
+    $postuler = new Postuler_Offre;
     $postuler->offre_id = $id;
     $postuler->developpeur_id = $dev_id;
     $postuler->statut = "1";

@@ -16,6 +16,6 @@ class Message extends Model
   }
   public function post()
   {
-      return $this->belongsTo('App\Postuler_offre');
+      return $this->belongsTo('App\Postuler_Offre');
   }
 }

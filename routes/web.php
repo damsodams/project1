@@ -22,7 +22,7 @@ Route::group(['middleware'=>'auth'],function () {
   //route recherche offre_entreprise
   Route::post('front/result', 'FrontControlleur@recherche')->name('recherche');
   //route action postuler
-  Route::get('front/postuler/{id}', 'DeveloppeurFrontController@postuler')->name('postuler_offre');
+  Route::get('front/postuler/{id}', 'DeveloppeurFrontController@postuler')->name('Postuler_Offre');
   //Route affichage de l'offre séléctionner
   Route::get('front/show/{id}', 'DeveloppeurFrontController@show')->name('show_offre');
   //route affichage des offre

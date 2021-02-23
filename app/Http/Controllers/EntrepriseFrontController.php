@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Postuler_offre;
+use App\Postuler_Offre;
 use App\Offre;
 use App\Entreprise;
 use App\developpeurs;
@@ -43,7 +43,7 @@ class EntrepriseFrontController extends Controller
     $message->is_open = true;
     $message->save();
     //Indique a l'utilisateur que la demande a ete lue :
-    $post = Postuler_offre::find($message->post->id);
+    $post = Postuler_Offre::find($message->post->id);
     if($post->statut == "1" ){
       $post->statut = "2";
     }
@@ -52,7 +52,7 @@ class EntrepriseFrontController extends Controller
     return view ('front.entreprise.mail.show')->with('message',$message);
   }
   public function candidature_accepter($id){
-    $post = Postuler_offre::find($id);
+    $post = Postuler_Offre::find($id);
     $post->statut = "3";
     $post->is_validate = true;
     $post->save();
@@ -61,7 +61,7 @@ class EntrepriseFrontController extends Controller
   }
   public function candidature_refuser($id){
 
-    $post = Postuler_offre::find($id);
+    $post = Postuler_Offre::find($id);
     $post->statut = "4";
     $post->is_validate = true;
     $post->save();
@@ -73,7 +73,7 @@ class EntrepriseFrontController extends Controller
     foreach ($value as $val) {
       $message = Message::find($val);
       if($message->post->statut != "3"){
-        $post = postuler_offre::find($message->post->id);
+        $post = Postuler_Offre::find($message->post->id);
         $post->statut = '4';
         $post->save();
       }

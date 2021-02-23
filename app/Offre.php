@@ -10,8 +10,8 @@ class Offre extends Model
   {
       return $this->belongsTo('App\Entreprise');
   }
-  public function postuler_offre()
+  public function Postuler_Offre()
   {
-      return $this->HasMany('App\postuler_offre');
+      return $this->HasMany('App\Postuler_Offre');
   }
 }

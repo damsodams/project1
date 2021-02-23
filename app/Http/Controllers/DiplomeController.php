@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Postuler_offre;
+use App\Postuler_Offre;
 use App\Offre;
 use App\developpeurs;
 use App\message;

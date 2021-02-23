@@ -100,8 +100,8 @@
                     <p>Mes Mails</p>
                     @php $i=0; @endphp
                     @foreach ($user->entreprise->offres as $offre)
-                      @if (isset($offre->postuler_offre))
-                        @foreach ($offre->postuler_offre as $post)
+                      @if (isset($offre->Postuler_Offre))
+                        @foreach ($offre->Postuler_Offre as $post)
                           @if ($post->statut == "1")
                             @php
                             $i++;

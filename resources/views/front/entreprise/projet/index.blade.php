@@ -11,7 +11,7 @@
       $candidat = false;
       $validate = false;
       $candidaturefuser = false;
-      foreach ($offre->postuler_offre as $postoffre ){
+      foreach ($offre->Postuler_Offre as $postoffre ){
 
         if($postoffre->statut != "4"){
           $candidat = true;
@@ -73,7 +73,7 @@
         @if (($candidat == true) || ($candidaturefuser == true))
           <h3>Candidats:</h3><hr>
           <div class="row">
-            @foreach ($offre->postuler_offre as $postoffre )
+            @foreach ($offre->Postuler_Offre as $postoffre )
               <div class="form-group col-md-6">
                 {{$postoffre->developpeur->user->name}}
               </div>

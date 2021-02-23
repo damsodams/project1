@@ -51,7 +51,7 @@
                 @if(isset($user))
                   @if($user->statut == "dev")
                     @if ($test == false)
-                      <a href="{{route('postuler_offre', ['id'=>$offre->id])}}" class="btn btn-success btn-sm">Postuler</a>
+                      <a href="{{route('Postuler_Offre', ['id'=>$offre->id])}}" class="btn btn-success btn-sm">Postuler</a>
                     @else
                       <a href="{{route('index_offre')}}" class="btn btn-warning btn-sm">Vous avez postulé à cette offre, consulter le suivi ?</a>
                     @endif

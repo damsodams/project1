@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Postuler_offre;
+use App\Postuler_Offre;
 use App\Offre;
 use App\developpeurs;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +19,7 @@ class PostulerController extends Controller
 
 
         $devid = auth::user()->developpeur_id;
-        $OffresPostuler = Postuler_offre::all()->where('developpeur_id',$devid);
+        $OffresPostuler = Postuler_Offre::all()->where('developpeur_id',$devid);
 
         return view("front.developpeur.demande")->with("OffresPostuler",$OffresPostuler);
         // Afiichage
@@ -55,7 +55,7 @@ class PostulerController extends Controller
     public function show($id)
     {
       $dev_id = auth::user()->developpeur_id;
-      $lesoffresuser = Postuler_offre::all()->where('developpeur_id',$dev_id);
+      $lesoffresuser = Postuler_Offre::all()->where('developpeur_id',$dev_id);
       $test = false;
       foreach ($lesoffresuser as $offre) {
         if($id == $offre->offre_id){
@@ -86,13 +86,13 @@ class PostulerController extends Controller
     public function edit($id)
     {
       $dev_id = auth::user()->developpeur_id;
-      $lesoffresuser = Postuler_offre::all()->where('developpeur_id',$dev_id);
+      $lesoffresuser = Postuler_Offre::all()->where('developpeur_id',$dev_id);
       foreach ($lesoffresuser as $offre) {
         if($id == $offre->offre_id){
           return redirect()->route("offre_entreprise.index")->with('message', '/Existe deja');
         }
       }
-        $postuler = new Postuler_offre;
+        $postuler = new Postuler_Offre;
         $postuler->offre_id = $id;
         $postuler->developpeur_id = $dev_id;
         $postuler->statut = "1";
