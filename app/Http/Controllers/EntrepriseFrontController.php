@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 use App\Postuler_Offre;
 use App\Offre;
 use App\Entreprise;
-use App\developpeurs;
+use App\Developpeurs;
 use App\Message;
-use App\diplome;
+use App\Diplome;
 use App\sms;
-use App\user;
-use App\conversation;
+use App\User;
+use App\Conversation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 

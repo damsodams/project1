@@ -8,11 +8,11 @@ class Developpeur extends Model
 {
   public function diplomes()
   {
-    return $this->hasMany('App\diplome');
+    return $this->hasMany('App\Diplome');
   }
   public function experiences()
   {
-    return $this->hasMany('App\experience');
+    return $this->hasMany('App\Experience');
   }
   public function user()
   {

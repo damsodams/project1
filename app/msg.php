@@ -8,6 +8,6 @@ class msg extends Model
 {
   public function users()
   {
-    return $this->belongTo(conversation::class);
+    return $this->belongTo(Conversation::class);
   }
 }

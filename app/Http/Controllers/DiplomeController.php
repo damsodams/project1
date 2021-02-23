@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Postuler_Offre;
 use App\Offre;
 use App\developpeurs;
-use App\message;
+use App\Message;
 use App\User;
 use App\Diplome;
 use App\Experience;

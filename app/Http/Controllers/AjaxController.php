@@ -31,7 +31,7 @@ class AjaxController extends Controller
      'message'       => 'required|max:255',
      'conversation_id' => 'required',
    ]);
-   
+
    $user =  auth::user();
 
    $msg = new msg;
@@ -52,7 +52,7 @@ class AjaxController extends Controller
   public function ajaxRequestSync(Request $request)
   {
 
-    $conversation = conversation::find($request->id);
+    $conversation = Conversation::find($request->id);
 
 
     return response()->json( ['messages' => $conversation->msgs, 'conversation_user' => $conversation->users , 'conversation' => $conversation]);
